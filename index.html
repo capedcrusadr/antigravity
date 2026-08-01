@@ -277,7 +277,7 @@
       </p>
     </div>
 
-    <!-- NAVIGATION (Header logo spaced, menu links compact and tighter with Google Sans) -->
+    <!-- NAVIGATION -->
     <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-700 bg-transparent py-5">
       <nav class="w-full max-w-none px-6 md:px-12 lg:px-16 flex items-center justify-between">
         <!-- Spaced brand name for luxury feel -->
@@ -286,7 +286,6 @@
         </a>
         <ul class="hidden items-center gap-8 md:flex">
           <li>
-            <!-- Menu links compact, tighter and definitive using unified sans font (medium letter spacing) -->
             <a href="#work" class="text-[11px] font-medium tracking-[0.25em] text-white uppercase transition-colors duration-700 hover:text-white/70">
               Our Work
             </a>
@@ -328,7 +327,7 @@
     </header>
 
     <main class="relative z-10">
-      <!-- HERO (Supports case-sensitivity and fallback URLs directly in video tags) -->
+      <!-- HERO -->
       <section id="top" class="relative flex h-screen items-center justify-center overflow-hidden">
         <div class="absolute inset-0">
           <video
@@ -340,7 +339,6 @@
             preload="auto"
             class="h-full w-full object-cover transition-transform duration-[2500ms] ease-[cubic-bezier(0.22,1,0.36,1)] scale-[1.15]"
           >
-            <!-- Formatted with lowercase, uppercase, and CDN fallbacks inside the HTML tag -->
             <source src="scenic_1.mp4" type="video/mp4" />
             <source src="scenic_1.MP4" type="video/mp4" />
             <source src="https://cdn.coverr.co/videos/coverr-sun-shining-over-the-ocean-2178/1080p.mp4" type="video/mp4" />
@@ -354,10 +352,9 @@
         </div>
       </section>
 
-      <!-- PORTFOLIO GRID (Medium Spacing py-16 md:py-20) -->
+      <!-- PORTFOLIO GRID (Clean section heading without 'our work' sublabel) -->
       <section id="work" class="relative mx-auto max-w-[1400px] px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <div data-reveal class="transform translate-y-[30px] opacity-0">
-          <p class="mb-3 text-xs font-light tracking-normal text-muted-foreground uppercase">Our work</p>
           <h2 class="mb-16 max-w-2xl text-4xl font-light leading-tight text-foreground text-balance md:text-5xl">
             A portfolio of altitude
           </h2>
@@ -421,7 +418,7 @@
                 </div>
               </div>
 
-              <!-- Only show the Category text inside card (Removed Location subheader) -->
+              <!-- Category text inside card -->
               <div class="absolute bottom-0 left-0 right-0 p-8 lg:p-10 z-10 transition-transform duration-500 group-hover:translate-x-1">
                 <h3 class="text-xl font-medium tracking-[0.3em] text-white uppercase font-sans">Wedding</h3>
               </div>
@@ -668,12 +665,11 @@
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- ENGAGING CLIENT CALLOUT (Medium Spacing py-16 md:py-20) -->
+      <!-- ENGAGING CLIENT CALLOUT (Clean heading without 'perspective redefined' tag) -->
       <section id="engage" class="border-t border-border bg-background py-16 md:py-20 text-center px-6 relative overflow-hidden">
         <div data-reveal class="max-w-3xl mx-auto flex flex-col items-center transform translate-y-[30px] opacity-0 relative z-10">
-          <p class="text-xs font-light tracking-normal text-muted-foreground uppercase mb-6 font-sans">Perspective Redefined</p>
           <h2 class="text-4xl font-light leading-tight text-foreground md:text-5xl lg:text-6xl text-balance">
             Ready to elevate your event?
           </h2>
@@ -687,11 +683,10 @@
         </div>
       </section>
 
-      <!-- CONTACT SECTION (Medium Spacing py-16 md:py-20) -->
+      <!-- CONTACT SECTION (Clean heading without 'contact' tag) -->
       <section id="contact-section" class="border-t border-border bg-background py-16 md:py-20">
         <div data-reveal class="mx-auto max-w-4xl px-6 transform translate-y-[30px] opacity-0">
           <div id="contact" class="text-center font-sans">
-            <p class="mb-4 text-xs font-light tracking-normal text-muted-foreground uppercase">Contact</p>
             <h2 class="mb-12 text-4xl font-light leading-tight text-foreground text-balance md:text-5xl">
               Begin the conversation
             </h2>
@@ -722,18 +717,11 @@
         </div>
       </section>
 
-      <!-- BRAND WATERMARK SECTION (Watermark matched exactly to the reference image details) -->
+      <!-- BRAND WATERMARK SECTION (Exact Google Antigravity branding typography from official website) -->
       <section class="bg-background pt-12 pb-16 text-center px-6 relative z-10 overflow-hidden border-t border-border">
         <div class="max-w-[1400px] mx-auto flex flex-col items-center">
-          <!-- Small stacked links at the top centered (Press and Releases) -->
-          <div class="flex flex-col gap-1 text-[11px] font-sans font-medium text-[#18181b]/70 mb-8 tracking-wide">
-            <span class="select-none">Press</span>
-            <span class="select-none">Releases</span>
-          </div>
-          <!-- Giant brand watermark with elevated standard-size 'ty' aligning to the dot on 'i' -->
-          <!-- Spacing from a to v matches exactly inside span. ty is positioned slightly smaller (0.8em) at top: -0.22em with normal negative spacing. -->
-          <h2 class="text-[19.5vw] font-medium leading-none tracking-tighter text-[#18181b] select-none" style="font-family: 'Inter', sans-serif; letter-spacing: -0.05em;">
-            Antigravi<span style="font-size: 0.8em; position: relative; top: -0.22em; margin-left: 0.02em; letter-spacing: -0.05em;">ty</span>
+          <h2 class="text-[17.5vw] font-medium leading-none tracking-tighter text-[#18181b] select-none" style="font-family: 'Product Sans', 'Google Sans', 'Inter', sans-serif; letter-spacing: -0.04em;">
+            Antigravi<span style="font-size: 0.82em; position: relative; top: -0.22em; margin-left: 0.01em; letter-spacing: -0.04em;">ty</span>
           </h2>
         </div>
       </section>
@@ -770,7 +758,7 @@
         }, duration);
       }
 
-      // 2. Nav scroll effect and Hamburger toggle (Links remain white, background goes black)
+      // 2. Nav scroll effect and Hamburger toggle
       function initNav() {
         const header = document.getElementById('main-header');
         const menuBtn = document.getElementById('menu-btn');
@@ -780,7 +768,6 @@
         const menuBar3 = document.getElementById('menu-bar-3');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        // Scroll listener for header background only (text remains white at all times)
         window.addEventListener('scroll', () => {
           if (window.scrollY > 40) {
             header.classList.remove('bg-transparent', 'py-5');
@@ -791,7 +778,6 @@
           }
         }, { passive: true });
 
-        // Menu open/close logic
         let menuOpen = false;
         function toggleMenu() {
           menuOpen = !menuOpen;
@@ -827,7 +813,7 @@
         const heroVideo = document.getElementById('hero-video');
         if (heroVideo) {
           heroVideo.playbackRate = 0.75;
-          heroVideo.muted = true; // Programmatically mute to secure autoplay
+          heroVideo.muted = true;
           
           let playAttempted = false;
           let fallbackTriggered = false;
@@ -880,7 +866,6 @@
           }, 3000);
         }
 
-        // Trigger text & scale animations on load
         setTimeout(() => {
           if (heroVideo) {
             heroVideo.classList.remove('scale-[1.15]');
@@ -898,7 +883,7 @@
         }, 100);
       }
 
-      // 4. Scroll Reveal Intersection Observer (Throttled translate offset for performance)
+      // 4. Scroll Reveal Intersection Observer
       function initScrollReveal() {
         const revealElements = document.querySelectorAll('[data-reveal]');
         const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
@@ -911,20 +896,20 @@
               
               setTimeout(() => {
                 el.style.opacity = '1';
-                el.style.transform = 'translate3d(0,0,0)'; // Hardware accelerated smoother end
+                el.style.transform = 'translate3d(0,0,0)';
               }, delay * 1000);
               
               observer.unobserve(el);
             }
           });
         }, {
-          threshold: 0.05, // Slightly lower threshold for faster triggers
+          threshold: 0.05,
           rootMargin: '0px 0px -50px 0px'
         });
 
         revealElements.forEach((el) => {
           el.style.opacity = '0';
-          el.style.transform = 'translate3d(0, 20px, 0)'; // Reduced translation offset for fluid transitions
+          el.style.transform = 'translate3d(0, 20px, 0)';
           
           const delay = parseFloat(el.getAttribute('data-delay') || '0');
           el.style.transition = `opacity 0.7s ${EASE} ${delay}s, transform 0.7s ${EASE} ${delay}s`;
@@ -1031,7 +1016,7 @@
         });
       }
 
-      // 7. Right HUD (Visible on all devices, scroll-linked animations synced via requestAnimationFrame using CSS 'top' property)
+      // 7. Right HUD (Starts scrolling as soon as it appears past heroHeight / 2)
       function initHUD() {
         const hudRight = document.getElementById('hud-right-container');
         const altNum = document.getElementById('hud-alt-num');
@@ -1043,30 +1028,28 @@
         function updateScrollMetrics() {
           const heroHeight = window.innerHeight;
           const currentScroll = window.scrollY;
+          const startScroll = heroHeight / 2; // HUD starts active as soon as it fades in
 
-          // Toggle visibility: only show HUD after scrolling past HALFWAY of the hero section
-          if (currentScroll > heroHeight / 2) {
+          if (currentScroll > startScroll) {
             hudRight.classList.remove('opacity-0', 'pointer-events-none');
             hudRight.classList.add('opacity-60'); 
+
+            // Calculate descending altitude starting immediately at startScroll
+            const totalDistance = document.documentElement.scrollHeight - window.innerHeight - startScroll;
+            if (totalDistance > 0) {
+              const relativeScroll = Math.max(0, Math.min(1, (currentScroll - startScroll) / totalDistance));
+              const currentAlt = Math.round(120 - relativeScroll * 120);
+              
+              if (altNum) {
+                altNum.textContent = `${currentAlt}m`;
+              }
+              if (altIndicator) {
+                altIndicator.style.top = (relativeScroll * 100) + '%';
+              }
+            }
           } else {
             hudRight.classList.remove('opacity-60');
             hudRight.classList.add('opacity-0', 'pointer-events-none');
-          }
-
-          // Calculate descending altitude from 120m to 0m (active scroll zone starts from heroHeight)
-          const scrollableArea = document.documentElement.scrollHeight - window.innerHeight - heroHeight;
-          if (scrollableArea > 0 && currentScroll >= heroHeight) {
-            const relativeScroll = Math.max(0, Math.min(1, (currentScroll - heroHeight) / scrollableArea));
-            const currentAlt = Math.round(120 - relativeScroll * 120);
-            
-            if (altNum) {
-              altNum.textContent = `${currentAlt}m`;
-            }
-            if (altIndicator) {
-              // Update vertical position on the ruler scale correctly from 0% to 100%
-              altIndicator.style.top = (relativeScroll * 100) + '%';
-            }
-          } else if (currentScroll < heroHeight) {
             if (altNum) altNum.textContent = "120m";
             if (altIndicator) altIndicator.style.top = '0%';
           }
@@ -1088,7 +1071,7 @@
         }, { passive: true });
       }
 
-      // 8. 3D Gimbal Card Tilt Effect (Smoother transitions using will-change and transform3d)
+      // 8. 3D Gimbal Card Tilt Effect
       function initCardTilt() {
         if (window.matchMedia('(pointer: coarse)').matches) return;
 
