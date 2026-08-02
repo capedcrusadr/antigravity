@@ -9,9 +9,9 @@
     <meta name="description" content="An ultra-luxury drone cinematography studio crafting gravity-defying aerial films for Hollywood productions, elite real estate, and heritage brands." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Google Sans Webfont integration, Outfit & Inter fallback fonts -->
+    <!-- Google Sans Flex & Google Sans Webfont integration -->
     <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap" rel="stylesheet" />
     
     <!-- Global JS Error Diagnostic Banner -->
     <script>
@@ -41,8 +41,9 @@
         theme: {
           extend: {
             fontFamily: {
-              sans: ['"Product Sans"', '"Google Sans"', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
-              serif: ['"Product Sans"', '"Google Sans"', 'Outfit', 'sans-serif'],
+              // Google Sans set globally matching https://antigravity.google/
+              sans: ['"Google Sans Flex"', '"Product Sans"', '"Google Sans"', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
+              serif: ['"Google Sans Flex"', '"Product Sans"', '"Google Sans"', 'Outfit', 'sans-serif'],
             },
             colors: {
               background: '#ffffff', 
@@ -69,7 +70,7 @@
     <!-- Custom Base styles & preloader keyframes -->
     <style>
       body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, a {
-        font-family: "Product Sans", "Google Sans", "Outfit", "Inter", sans-serif !important;
+        font-family: "Google Sans Flex", "Product Sans", "Google Sans", "Outfit", "Inter", sans-serif !important;
       }
       body {
         background-color: #ffffff;
@@ -158,7 +159,7 @@
       </svg>
     </div>
 
-    <!-- RIGHT HUD: Scroll-linked Descending Altitude Meter Scale (Black color, visible past half-hero, visible on ALL devices) -->
+    <!-- RIGHT HUD: Scroll-linked Descending Altitude Meter Scale (Black color, starts scrolling as soon as it appears) -->
     <div
       id="hud-right-container"
       class="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-40 flex flex-row gap-2 md:gap-4 items-center font-mono pointer-events-none select-none opacity-0 transition-opacity duration-700 text-black scale-90 md:scale-100"
@@ -277,7 +278,7 @@
       </p>
     </div>
 
-    <!-- NAVIGATION -->
+    <!-- NAVIGATION (Header logo spaced, menu links compact and tighter with Google Sans) -->
     <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-700 bg-transparent py-5">
       <nav class="w-full max-w-none px-6 md:px-12 lg:px-16 flex items-center justify-between">
         <!-- Spaced brand name for luxury feel -->
@@ -339,6 +340,7 @@
             preload="auto"
             class="h-full w-full object-cover transition-transform duration-[2500ms] ease-[cubic-bezier(0.22,1,0.36,1)] scale-[1.15]"
           >
+            <!-- Formatted with lowercase, uppercase, and CDN fallbacks inside the HTML tag -->
             <source src="scenic_1.mp4" type="video/mp4" />
             <source src="scenic_1.MP4" type="video/mp4" />
             <source src="https://cdn.coverr.co/videos/coverr-sun-shining-over-the-ocean-2178/1080p.mp4" type="video/mp4" />
@@ -352,7 +354,7 @@
         </div>
       </section>
 
-      <!-- PORTFOLIO GRID -->
+      <!-- PORTFOLIO GRID (Removed "Our work" tag above title) -->
       <section id="work" class="relative mx-auto max-w-[1400px] px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <div data-reveal class="transform translate-y-[30px] opacity-0">
           <h2 class="mb-16 max-w-2xl text-4xl font-light leading-tight text-foreground text-balance md:text-5xl">
@@ -418,7 +420,6 @@
                 </div>
               </div>
 
-              <!-- Category text inside card -->
               <div class="absolute bottom-0 left-0 right-0 p-8 lg:p-10 z-10 transition-transform duration-500 group-hover:translate-x-1">
                 <h3 class="text-xl font-medium tracking-[0.3em] text-white uppercase font-sans">Wedding</h3>
               </div>
@@ -667,7 +668,7 @@
         </div>
       </div>
 
-      <!-- ENGAGING CLIENT CALLOUT -->
+      <!-- ENGAGING CLIENT CALLOUT (Removed "Perspective Redefined" tag above title) -->
       <section id="engage" class="border-t border-border bg-background py-16 md:py-20 text-center px-6 relative overflow-hidden">
         <div data-reveal class="max-w-3xl mx-auto flex flex-col items-center transform translate-y-[30px] opacity-0 relative z-10">
           <h2 class="text-4xl font-light leading-tight text-foreground md:text-5xl lg:text-6xl text-balance">
@@ -683,81 +684,54 @@
         </div>
       </section>
 
-      <!-- CONTACT SECTION (Restored interactive form as it was) -->
+      <!-- CONTACT SECTION (Removed "Contact" tag above title) -->
       <section id="contact-section" class="border-t border-border bg-background py-16 md:py-20">
-        <div data-reveal class="mx-auto max-w-2xl px-6 transform translate-y-[30px] opacity-0">
+        <div data-reveal class="mx-auto max-w-4xl px-6 transform translate-y-[30px] opacity-0">
           <div id="contact" class="text-center font-sans">
-            <p class="mb-4 text-xs font-light tracking-[0.5em] text-muted-foreground uppercase font-mono">Commission</p>
-            <h2 class="mb-16 text-4xl font-light leading-tight text-foreground text-balance md:text-5xl">
+            <h2 class="mb-12 text-4xl font-light leading-tight text-foreground text-balance md:text-5xl">
               Begin the conversation
             </h2>
             
-            <form class="flex flex-col gap-10 text-left" onsubmit="event.preventDefault();">
-              <!-- Name Field -->
-              <div class="relative floating-field-container">
-                <label for="name" class="pointer-events-none absolute left-0 font-light tracking-[0.2em] uppercase transition-all duration-300 top-6 text-xs text-muted-foreground">
-                  Full Name
-                </label>
-                <input
-                  id="name" name="name" type="text" autocomplete="off"
-                  class="floating-input w-full border-b border-border bg-transparent pb-3 pt-6 text-sm font-light text-foreground outline-none transition-colors duration-300 focus:border-foreground"
-                />
-              </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 max-w-4xl mx-auto font-sans">
+              <!-- Call Block -->
+              <a href="tel:+13105550190" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+                <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Voice</span>
+                <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">Call Us</span>
+                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">+1 (310) 555-0190</span>
+              </a>
               
-              <!-- Email Field -->
-              <div class="relative floating-field-container">
-                <label for="email" class="pointer-events-none absolute left-0 font-light tracking-[0.2em] uppercase transition-all duration-300 top-6 text-xs text-muted-foreground">
-                  Email Address
-                </label>
-                <input
-                  id="email" name="email" type="email" autocomplete="off"
-                  class="floating-input w-full border-b border-border bg-transparent pb-3 pt-6 text-sm font-light text-foreground outline-none transition-colors duration-300 focus:border-foreground"
-                />
-              </div>
+              <!-- WhatsApp Block -->
+              <a href="https://wa.me/13105550190" target="_blank" rel="noopener" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+                <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Message</span>
+                <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">WhatsApp</span>
+                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">Start Chat</span>
+              </a>
 
-              <!-- Project Details Field -->
-              <div class="relative floating-field-container">
-                <label for="project" class="pointer-events-none absolute left-0 font-light tracking-[0.2em] uppercase transition-all duration-300 top-6 text-xs text-muted-foreground">
-                  Project Details
-                </label>
-                <textarea
-                  id="project" name="project" rows="4" autocomplete="off"
-                  class="floating-input w-full border-b border-border bg-transparent pb-3 pt-6 text-sm font-light text-foreground outline-none transition-colors duration-300 focus:border-foreground"
-                ></textarea>
-              </div>
-
-              <button
-                type="submit"
-                class="mt-2 self-center border border-foreground px-12 py-4 text-xs font-light tracking-[0.4em] text-foreground uppercase transition-all duration-500 hover:bg-foreground hover:text-background"
-              >
-                Send Inquiry
-              </button>
-            </form>
+              <!-- Instagram Block -->
+              <a href="https://instagram.com" target="_blank" rel="noopener" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+                <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Social</span>
+                <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">Instagram</span>
+                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">@antigravity.films</span>
+              </a>
+            </div>
           </div>
         </div>
       </section>
 
-      <!-- BRAND WATERMARK SECTION (Restored Press & Releases links, matching reference) -->
-      <section class="bg-background pt-12 pb-16 text-center px-6 relative z-10 overflow-hidden border-t border-border">
+      <!-- BRAND WATERMARK SECTION (Pristine Google Antigravity branding matching https://antigravity.google/) -->
+      <section class="bg-background pt-16 pb-20 text-center px-6 relative z-10 overflow-hidden border-t border-border">
         <div class="max-w-[1400px] mx-auto flex flex-col items-center">
-          <div class="flex flex-col gap-1 text-[11px] font-sans font-medium text-[#18181b]/70 mb-8 tracking-wide">
-            <a href="#" class="hover:text-black transition-colors duration-300">Press</a>
-            <a href="#" class="hover:text-black transition-colors duration-300">Releases</a>
-          </div>
-          <h2 class="text-[17.5vw] font-medium leading-none tracking-tighter text-[#18181b] select-none" style="font-family: 'Product Sans', 'Google Sans', 'Inter', sans-serif; letter-spacing: -0.04em;">
-            Antigravi<span style="font-size: 0.82em; position: relative; top: -0.22em; margin-left: 0.01em; letter-spacing: -0.04em;">ty</span>
+          <!-- Colossal Google Sans Antigravity wordmark matching official site branding -->
+          <h2 class="text-[17vw] font-medium leading-none text-[#18181b] select-none tracking-tight font-sans">
+            Antigravity
           </h2>
         </div>
       </section>
     </main>
 
-    <!-- FOOTER (Full branding restored: logo, cities, copyright) -->
+    <!-- FOOTER -->
     <footer class="border-t border-border bg-background relative z-10">
-      <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-6 px-6 py-12 md:flex-row lg:px-10">
-        <p class="font-serif text-lg tracking-[0.3em] text-foreground uppercase">Antigravity</p>
-        <p class="text-[10px] font-light tracking-[0.3em] text-muted-foreground uppercase font-mono">
-          Los Angeles · Reykjavik · Monaco
-        </p>
+      <div class="mx-auto max-w-7xl px-6 py-12 flex items-center justify-center">
         <p class="text-[10px] font-light tracking-[0.3em] text-muted-foreground uppercase font-mono">
           © 2025-2026 Antigravity Studio
         </p>
@@ -774,17 +748,19 @@
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const duration = reduced ? 300 : 2400;
 
+        // Fading out
         setTimeout(() => {
           preloader.style.opacity = '0';
           preloader.style.transition = 'opacity 0.8s ease-in-out';
         }, duration - 800);
 
+        // Completely remove
         setTimeout(() => {
           preloader.style.display = 'none';
         }, duration);
       }
 
-      // 2. Nav scroll effect and Hamburger toggle
+      // 2. Nav scroll effect and Hamburger toggle (Links remain white, background goes black)
       function initNav() {
         const header = document.getElementById('main-header');
         const menuBtn = document.getElementById('menu-btn');
@@ -794,6 +770,7 @@
         const menuBar3 = document.getElementById('menu-bar-3');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
+        // Scroll listener for header background only (text remains white at all times)
         window.addEventListener('scroll', () => {
           if (window.scrollY > 40) {
             header.classList.remove('bg-transparent', 'py-5');
@@ -804,6 +781,7 @@
           }
         }, { passive: true });
 
+        // Menu open/close logic
         let menuOpen = false;
         function toggleMenu() {
           menuOpen = !menuOpen;
@@ -839,7 +817,7 @@
         const heroVideo = document.getElementById('hero-video');
         if (heroVideo) {
           heroVideo.playbackRate = 0.75;
-          heroVideo.muted = true;
+          heroVideo.muted = true; // Programmatically mute to secure autoplay
           
           let playAttempted = false;
           let fallbackTriggered = false;
@@ -892,6 +870,7 @@
           }, 3000);
         }
 
+        // Trigger text & scale animations on load
         setTimeout(() => {
           if (heroVideo) {
             heroVideo.classList.remove('scale-[1.15]');
@@ -909,7 +888,7 @@
         }, 100);
       }
 
-      // 4. Scroll Reveal Intersection Observer
+      // 4. Scroll Reveal Intersection Observer (Throttled translate offset for performance)
       function initScrollReveal() {
         const revealElements = document.querySelectorAll('[data-reveal]');
         const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
@@ -922,7 +901,7 @@
               
               setTimeout(() => {
                 el.style.opacity = '1';
-                el.style.transform = 'translate3d(0,0,0)';
+                el.style.transform = 'translate3d(0,0,0)'; 
               }, delay * 1000);
               
               observer.unobserve(el);
@@ -935,7 +914,7 @@
 
         revealElements.forEach((el) => {
           el.style.opacity = '0';
-          el.style.transform = 'translate3d(0, 20px, 0)';
+          el.style.transform = 'translate3d(0, 20px, 0)'; 
           
           const delay = parseFloat(el.getAttribute('data-delay') || '0');
           el.style.transition = `opacity 0.7s ${EASE} ${delay}s, transform 0.7s ${EASE} ${delay}s`;
@@ -944,34 +923,7 @@
         });
       }
 
-      // 5. Floating Label Fields Interaction
-      function initContactForm() {
-        const inputs = document.querySelectorAll('.floating-input');
-        inputs.forEach(input => {
-          const container = input.closest('.floating-field-container');
-          if (!container) return;
-          const label = container.querySelector('label');
-          if (!label) return;
-
-          function updateLabelState() {
-            if (document.activeElement === input || input.value.trim().length > 0) {
-              label.classList.remove('top-6', 'text-xs', 'text-muted-foreground');
-              label.classList.add('top-0', 'text-[10px]', 'text-foreground', 'font-bold');
-            } else {
-              label.classList.remove('top-0', 'text-[10px]', 'text-foreground', 'font-bold');
-              label.classList.add('top-6', 'text-xs', 'text-muted-foreground');
-            }
-          }
-
-          input.addEventListener('focus', updateLabelState);
-          input.addEventListener('blur', updateLabelState);
-          input.addEventListener('input', updateLabelState);
-
-          setTimeout(updateLabelState, 200);
-        });
-      }
-
-      // 6. Video Category Gallery Modal Logic
+      // 5. Video Category Gallery Modal Logic
       const categoryVideos = {
         wedding: [
           { title: "The Meridian Estate (Aerial Walkthrough)", url: "https://cdn.coverr.co/videos/coverr-bird-s-eye-view-of-a-wedding-268/1080p.mp4" },
@@ -1069,7 +1021,7 @@
         });
       }
 
-      // 7. Right HUD (Starts scrolling as soon as it appears past heroHeight / 2)
+      // 7. Right HUD (Starts sliding down as soon as it fades in at half-hero scroll)
       function initHUD() {
         const hudRight = document.getElementById('hud-right-container');
         const altNum = document.getElementById('hud-alt-num');
@@ -1083,29 +1035,34 @@
           const currentScroll = window.scrollY;
           const startScroll = heroHeight / 2;
 
+          // Toggle visibility: fade in at halfway point of hero section
           if (currentScroll > startScroll) {
             hudRight.classList.remove('opacity-0', 'pointer-events-none');
             hudRight.classList.add('opacity-60'); 
-
-            const totalDistance = document.documentElement.scrollHeight - window.innerHeight - startScroll;
-            if (totalDistance > 0) {
-              const relativeScroll = Math.max(0, Math.min(1, (currentScroll - startScroll) / totalDistance));
-              const currentAlt = Math.round(120 - relativeScroll * 120);
-              
-              if (altNum) {
-                altNum.textContent = `${currentAlt}m`;
-              }
-              if (altIndicator) {
-                altIndicator.style.top = (relativeScroll * 100) + '%';
-              }
-            }
           } else {
             hudRight.classList.remove('opacity-60');
             hudRight.classList.add('opacity-0', 'pointer-events-none');
+          }
+
+          // Calculate descending altitude from 120m to 0m (Starts scrolling IMMEDIATELY upon appearance)
+          const scrollableArea = document.documentElement.scrollHeight - window.innerHeight - startScroll;
+          if (scrollableArea > 0 && currentScroll >= startScroll) {
+            const relativeScroll = Math.max(0, Math.min(1, (currentScroll - startScroll) / scrollableArea));
+            const currentAlt = Math.round(120 - relativeScroll * 120);
+            
+            if (altNum) {
+              altNum.textContent = `${currentAlt}m`;
+            }
+            if (altIndicator) {
+              // Update vertical position on the ruler scale starting immediately from 0% to 100%
+              altIndicator.style.top = (relativeScroll * 100) + '%';
+            }
+          } else {
             if (altNum) altNum.textContent = "120m";
             if (altIndicator) altIndicator.style.top = '0%';
           }
           
+          // Rotate background compass
           if (compass) {
             compass.style.transform = `translate3d(-50%, -50%, 0) rotate(${currentScroll * 0.06}deg)`;
           }
@@ -1122,7 +1079,7 @@
         }, { passive: true });
       }
 
-      // 8. 3D Gimbal Card Tilt Effect
+      // 8. 3D Gimbal Card Tilt Effect (Smoother transitions using will-change and transform3d)
       function initCardTilt() {
         if (window.matchMedia('(pointer: coarse)').matches) return;
 
@@ -1160,7 +1117,6 @@
         initNav();
         initHero();
         initScrollReveal();
-        initContactForm();
         initGalleryModal();
         initHUD();
         initCardTilt();
