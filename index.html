@@ -2,9 +2,9 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
     <meta name="theme-color" content="#000000" />
-    <meta name="color-scheme" content="light dark" />
+    <meta name="color-scheme" content="dark light" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>ANTIGRAVITY — Luxury Drone Cinematography</title>
@@ -76,14 +76,14 @@
     
     <!-- Custom Base styles & preloader keyframes -->
     <style>
-      body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, a {
-        font-family: "Google Sans Flex", "Product Sans", "Google Sans", "Outfit", "Inter", sans-serif !important;
-      }
-      body {
+      html, body {
         background-color: #ffffff;
         color: #0c0c0d;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
+      }
+      body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, a {
+        font-family: "Google Sans Flex", "Product Sans", "Google Sans", "Outfit", "Inter", sans-serif !important;
       }
       ::selection {
         background: #000000;
@@ -120,7 +120,7 @@
         to { opacity: 1; }
       }
 
-      /* Hover Draw Card Border Keyframes (White color) */
+      /* Hover Draw Card Border Keyframes */
       .portfolio-card:hover .card-border-path {
         animation: drawCardBorder 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
       }
@@ -128,14 +128,12 @@
         to { stroke-dashoffset: 0; }
       }
 
-      /* 3D Tilt transitions for premium card feel */
       .portfolio-card {
         transform-style: preserve-3d;
         will-change: transform, box-shadow;
         transition: transform 0.15s ease-out, box-shadow 0.15s ease-out;
       }
 
-      /* Performance classes for hardware acceleration */
       #bg-compass, #hud-alt-indicator, #hud-right-container, #main-header {
         will-change: transform, opacity;
         transform: translate3d(0,0,0);
@@ -145,7 +143,7 @@
   </head>
   <body class="bg-background text-foreground relative">
 
-    <!-- SCROLL COMPASS BACKGROUND (Preloader themed visual anchor) -->
+    <!-- SCROLL COMPASS BACKGROUND -->
     <div
       id="bg-compass"
       class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 text-primary opacity-[0.015] w-[60vh] h-[60vh]"
@@ -163,7 +161,7 @@
       </svg>
     </div>
 
-    <!-- RIGHT HUD: Scroll-linked Descending Altitude Meter Scale -->
+    <!-- RIGHT HUD: Altitude Scale Meter -->
     <div
       id="hud-right-container"
       class="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-40 flex flex-row gap-2 md:gap-4 items-center font-mono pointer-events-none select-none opacity-0 transition-opacity duration-700 text-black scale-90 md:scale-100"
@@ -172,7 +170,6 @@
         <span class="text-black font-semibold">ALTITUDE</span>
         <span id="hud-alt-num" class="text-[10px] md:text-xs text-black font-bold tracking-normal">120m</span>
       </div>
-      <!-- Altitude scale bar (Ruler) -->
       <div class="relative w-2 md:w-3 h-36 md:h-48 border-r border-black flex flex-col justify-between py-1 text-[7px] md:text-[8px] text-black">
         <span class="w-1.5 md:w-2 h-px bg-black self-end"></span>
         <span class="w-1 md:w-1.5 h-px bg-black self-end"></span>
@@ -181,8 +178,6 @@
         <span class="w-1.5 md:w-2 h-px bg-black self-end"></span>
         <span class="w-1 md:w-1.5 h-px bg-black self-end"></span>
         <span class="w-1.5 md:w-2 h-px bg-black self-end"></span>
-        
-        <!-- Sliding notch pointer -->
         <div
           id="hud-alt-indicator"
           class="absolute right-0 w-1.5 md:w-2 h-1.5 md:w-2 bg-black rounded-full translate-x-1/2 -translate-y-1/2 transition-all duration-200 ease-out"
@@ -278,10 +273,10 @@
       </p>
     </div>
 
-    <!-- NAVIGATION (Supports safe-area-inset-top to scroll seamlessly beneath Mobile Dynamic Island / Notch) -->
-    <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-700 bg-transparent py-5 pt-[calc(1.25rem+env(safe-area-inset-top))]">
+    <!-- NAVIGATION HEADER (Seamless full bleed under top dynamic island) -->
+    <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-700 bg-black/80 backdrop-blur-md py-4 pt-[calc(1rem+env(safe-area-inset-top))]">
       <nav class="w-full max-w-none px-6 md:px-12 lg:px-16 flex items-center justify-between">
-        <a href="#top" class="text-lg sm:text-xl font-medium tracking-[0.35em] sm:tracking-[0.55em] text-white uppercase transition-colors duration-700">
+        <a href="#top" class="text-base sm:text-xl font-medium tracking-[0.35em] sm:tracking-[0.55em] text-white uppercase transition-colors duration-700">
           Antigravity
         </a>
         <ul class="hidden items-center gap-8 md:flex">
@@ -327,17 +322,18 @@
     </header>
 
     <main class="relative z-10">
-      <!-- HERO (Dynamic viewport height h-[100dvh], fluid responsive typography without perspective distortion) -->
-      <section id="top" class="relative flex h-[100dvh] items-center justify-center overflow-hidden">
-        <div class="absolute inset-0">
+      <!-- HERO (Mobile responsive dynamic height, video inline playback, no perspective distortion) -->
+      <section id="top" class="relative flex min-h-[100dvh] w-full items-center justify-center overflow-hidden bg-black pt-[env(safe-area-inset-top)]">
+        <div class="absolute inset-0 w-full h-full overflow-hidden">
           <video
             id="hero-video"
             autoplay
             muted
             loop
             playsinline
+            webkit-playsinline
             preload="auto"
-            class="h-full w-full object-cover transition-transform duration-[2500ms] ease-[cubic-bezier(0.22,1,0.36,1)] scale-100"
+            class="h-full w-full object-cover pointer-events-none"
           >
             <source src="scenic_1.mp4" type="video/mp4" />
             <source src="scenic_1.MP4" type="video/mp4" />
@@ -346,7 +342,6 @@
           <div class="absolute inset-0 bg-black/45"></div>
         </div>
         <div class="relative z-10 flex flex-col items-center px-4 sm:px-6 text-center max-w-full">
-          <!-- Fluid responsive letter tracking to prevent line overflow or perspective distortion on mobile screens -->
           <h1 id="hero-title" class="w-full max-w-5xl text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light leading-[1.15] text-white text-balance opacity-0 translate-y-[20px] transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] tracking-[0.2em] sm:tracking-[0.35em] md:tracking-[0.55em]">
             Perspective. Elevated.
           </h1>
@@ -370,7 +365,7 @@
               class="portfolio-card group relative block w-full overflow-hidden bg-card aspect-[16/9] border border-border rounded-[4px] shadow-sm"
             >
               <video
-                autoplay muted loop playsinline
+                autoplay muted loop playsinline webkit-playsinline
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
               >
                 <source src="https://cdn.coverr.co/videos/coverr-bird-s-eye-view-of-a-wedding-268/1080p.mp4" type="video/mp4" />
@@ -380,7 +375,6 @@
                 style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0) 100%)"
               ></div>
               
-              <!-- Loader-themed SVG borders & spinning corner rotors on hover -->
               <div class="absolute inset-0 pointer-events-none z-20 transition-opacity duration-[800ms] ease-out opacity-0 group-hover:opacity-100">
                 <svg class="absolute inset-0 w-full h-full" fill="none" stroke="#ffffff" stroke-width="1.2">
                   <rect class="card-border-path" x="6" y="6" width="calc(100% - 12px)" height="calc(100% - 12px)" stroke-dasharray="1600" stroke-dashoffset="1600" />
@@ -429,7 +423,7 @@
               class="portfolio-card group relative block w-full overflow-hidden bg-card aspect-[16/9] border border-border rounded-[4px] shadow-sm"
             >
               <video
-                autoplay muted loop playsinline
+                autoplay muted loop playsinline webkit-playsinline
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
               >
                 <source src="https://cdn.coverr.co/videos/coverr-forest-covered-by-a-thick-fog-3180/1080p.mp4" type="video/mp4" />
@@ -487,7 +481,7 @@
               class="portfolio-card group relative block w-full overflow-hidden bg-card aspect-[16/9] border border-border rounded-[4px] shadow-sm"
             >
               <video
-                autoplay muted loop playsinline
+                autoplay muted loop playsinline webkit-playsinline
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
               >
                 <source src="https://cdn.coverr.co/videos/coverr-construction-equipment-9061/1080p.mp4" type="video/mp4" />
@@ -545,7 +539,7 @@
               class="portfolio-card group relative block w-full overflow-hidden bg-card aspect-[16/9] border border-border rounded-[4px] shadow-sm"
             >
               <video
-                autoplay muted loop playsinline
+                autoplay muted loop playsinline webkit-playsinline
                 class="absolute inset-0 w-full h-full object-cover transition-transform duration-1000 group-hover:scale-[1.03]"
               >
                 <source src="https://cdn.coverr.co/videos/coverr-hieronymites-monastery-in-lisbon-1895/1080p.mp4" type="video/mp4" />
@@ -627,6 +621,7 @@
                 controls
                 autoplay
                 playsinline
+                webkit-playsinline
                 class="w-full h-full object-cover"
               >
                 <source src="" type="video/mp4" />
@@ -640,7 +635,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div
 
       <!-- ENGAGING CLIENT CALLOUT -->
       <section id="engage" class="border-t border-border bg-background py-16 md:py-20 text-center px-6 relative overflow-hidden">
@@ -657,7 +652,7 @@
         </div>
       </section>
 
-      <!-- CONTACT SECTION (Configured exact links for Voice call 9500147241, WhatsApp 9600182652, and Instagram _iamvignesh_) -->
+      <!-- CONTACT SECTION (Number and ID texts removed under Call, WhatsApp & Instagram buttons) -->
       <section id="contact-section" class="border-t border-border bg-background py-16 md:py-20">
         <div data-reveal class="mx-auto max-w-4xl px-6 transform translate-y-[30px] opacity-0">
           <div id="contact" class="text-center font-sans">
@@ -666,37 +661,45 @@
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 max-w-4xl mx-auto font-sans">
-              <!-- Call Block: Voice Call redirect to 9500147241 -->
-              <a href="tel:9500147241" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+              <!-- Call Block: Redirects to tel:9500147241 without extra number text underneath -->
+              <a href="tel:9500147241" class="group flex flex-col items-center justify-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
                 <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Voice</span>
                 <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">Call Us</span>
-                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">+91 9500147241</span>
               </a>
               
-              <!-- WhatsApp Block: Redirect to wa.me/9600182652 -->
-              <a href="https://wa.me/9600182652" target="_blank" rel="noopener" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+              <!-- WhatsApp Block: Redirects to wa.me/9600182652 without extra number text underneath -->
+              <a href="https://wa.me/9600182652" target="_blank" rel="noopener" class="group flex flex-col items-center justify-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
                 <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Message</span>
                 <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">WhatsApp</span>
-                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">+91 9600182652</span>
               </a>
 
-              <!-- Instagram Block: Redirect to _iamvignesh_ profile -->
-              <a href="https://www.instagram.com/_iamvignesh_?igsh=OHZyMGY3bmZzZW1z&utm_source=qr" target="_blank" rel="noopener" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+              <!-- Instagram Block: Redirects to _iamvignesh_ profile without extra ID text underneath -->
+              <a href="https://www.instagram.com/_iamvignesh_?igsh=OHZyMGY3bmZzZW1z&utm_source=qr" target="_blank" rel="noopener" class="group flex flex-col items-center justify-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
                 <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Social</span>
                 <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">Instagram</span>
-                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">@_iamvignesh_</span>
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- BRAND WATERMARK SECTION (Faithfully matching https://antigravity.google/ Google Sans Flex format, size & tracking) -->
-      <section class="bg-background pt-20 pb-24 text-center px-6 relative z-10 overflow-hidden border-t border-border">
-        <div class="max-w-[1400px] mx-auto flex flex-col items-center justify-center">
-          <h2 class="text-[16vw] sm:text-[17vw] font-normal leading-none text-[#18181b] select-none tracking-[-0.035em] font-sans transition-all duration-300">
-            Antigravity
-          </h2>
+      <!-- BRAND WATERMARK SECTION (Identical SVG vector branding directly extracted from https://antigravity.google/) -->
+      <section class="bg-background pt-20 pb-24 text-center px-6 relative z-10 overflow-hidden border-t border-border flex items-center justify-center">
+        <div class="w-full max-w-[1200px] mx-auto flex items-center justify-center px-4">
+          <!-- Direct SVG Vector representation of Antigravity from reference site https://antigravity.google/ -->
+          <svg viewBox="440 0 430 115" class="w-full h-auto text-[#18181b] select-none block" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M839.836 109.037C839.654 109.462 839.442 109.918 839.199 110.403C838.956 110.949 838.805 111.283 838.744 111.405H830.732C831.096 110.616 831.491 109.735 831.916 108.764C832.341 107.854 832.856 106.731 833.463 105.396C833.828 104.607 834.161 103.878 834.465 103.211C834.768 102.543 835.102 101.784 835.466 100.935C835.891 100.146 836.377 99.1443 836.923 97.9304L841.111 88.8262L821.901 45.3083H830.277L844.844 79.8131H845.026L859.046 45.3083H867.422L843.387 100.753C843.144 101.299 842.75 102.149 842.203 103.302C841.718 104.516 841.232 105.669 840.747 106.761C840.322 107.915 840.018 108.673 839.836 109.037Z" fill="currentColor"></path>
+            <path d="M792.471 52.3186V45.3084H800.665V32.1984H808.403V45.3084H819.784V52.3186H808.403V77.6282C808.403 80.238 808.919 82.1802 809.951 83.4548C811.044 84.6687 812.652 85.2757 814.776 85.2757C815.748 85.2757 816.658 85.1543 817.508 84.9115C818.357 84.608 819.177 84.2135 819.966 83.7279V91.2844C818.995 91.6486 817.993 91.9217 816.961 92.1038C815.93 92.3466 814.807 92.4679 813.593 92.4679C809.708 92.4679 806.583 91.3148 804.216 89.0084C801.848 86.6413 800.665 83.4852 800.665 79.54V52.3186H792.471Z" fill="currentColor"></path>
+            <path d="M778.634 91.7396V45.3083H786.373V91.7396H778.634ZM782.458 36.7504C780.941 36.7504 779.636 36.2042 778.543 35.1117C777.451 34.0192 776.905 32.7142 776.905 31.1969C776.905 29.6188 777.451 28.3139 778.543 27.2821C779.636 26.1896 780.941 25.6433 782.458 25.6433C784.036 25.6433 785.341 26.1896 786.373 27.2821C787.465 28.3139 788.012 29.6188 788.012 31.1969C788.012 32.7142 787.465 34.0192 786.373 35.1117C785.341 36.2042 784.036 36.7504 782.458 36.7504Z" fill="currentColor"></path>
+            <path d="M747.697 91.7395L728.943 45.3083H737.227L751.612 82.6354H751.794L766.361 45.3083H774.463L755.527 91.7395H747.697Z" fill="currentColor"></path>
+            <path d="M704.033 93.1963C700.574 93.1963 697.539 92.5286 694.929 91.1934C692.319 89.8581 690.256 88.0373 688.738 85.7309C687.282 83.3638 686.553 80.6932 686.553 77.7192C686.553 74.3203 687.434 71.4677 689.194 69.1613C690.954 66.7942 693.321 65.0341 696.295 63.8809C699.269 62.667 702.546 62.06 706.127 62.06C708.191 62.06 710.103 62.2421 711.863 62.6063C713.623 62.9098 715.141 63.3043 716.415 63.7898C717.75 64.2147 718.752 64.6395 719.419 65.0644V62.2421C719.419 58.7218 718.175 55.9299 715.687 53.8663C713.198 51.8027 710.164 50.7709 706.583 50.7709C704.033 50.7709 701.636 51.3475 699.39 52.5007C697.205 53.5932 695.476 55.1409 694.201 57.1438L688.374 52.7738C689.588 50.9529 691.106 49.3749 692.926 48.0396C694.747 46.7043 696.811 45.6725 699.117 44.9442C701.484 44.2159 703.973 43.8517 706.583 43.8517C712.895 43.8517 717.841 45.5208 721.422 48.859C725.003 52.1972 726.794 56.6886 726.794 62.3332V91.7396H719.419V85.0936H719.055C718.266 86.4289 717.143 87.7338 715.687 89.0084C714.23 90.2223 712.5 91.2237 710.497 92.0127C708.555 92.8018 706.401 93.1963 704.033 93.1963ZM704.762 86.3682C707.432 86.3682 709.86 85.7005 712.045 84.3652C714.291 83.03 716.081 81.2395 717.417 78.9938C718.752 76.7481 719.419 74.29 719.419 71.6194C718.024 70.6483 716.263 69.8593 714.139 69.2523C712.075 68.6454 709.799 68.3419 707.311 68.3419C702.88 68.3419 699.633 69.2523 697.57 71.0732C695.506 72.894 694.474 75.1397 694.474 77.8102C694.474 80.3594 695.445 82.423 697.387 84.0011C699.33 85.5791 701.788 86.3682 704.762 86.3682Z" fill="currentColor"></path>
+            <path d="M658.47 91.7395V45.3083H665.844V52.7737H666.209C666.815 51.0136 667.817 49.4962 669.213 48.2216C670.67 46.8863 672.308 45.8545 674.129 45.1262C676.011 44.3372 677.862 43.9427 679.683 43.9427C681.079 43.9427 682.171 44.0337 682.96 44.2158C683.749 44.3372 684.478 44.5496 685.145 44.8531V53.2289C684.174 52.7434 683.112 52.3792 681.959 52.1364C680.866 51.8936 679.743 51.7722 678.59 51.7722C676.344 51.7722 674.281 52.4095 672.399 53.6841C670.518 54.9587 669 56.6582 667.847 58.7825C666.755 60.9068 666.209 63.2435 666.209 65.7927V91.7395H658.47Z" fill="currentColor"></path>
+            <path d="M626.539 112.861C622.594 112.861 619.195 112.194 616.343 110.858C613.551 109.584 611.275 107.945 609.514 105.942C607.815 103.939 606.601 101.906 605.873 99.8423L612.974 96.838C613.945 99.3871 615.584 101.511 617.89 103.211C620.257 104.971 623.14 105.851 626.539 105.851C631.395 105.851 635.127 104.425 637.737 101.572C640.347 98.7802 641.652 94.8654 641.652 89.8277V84.6384H641.288C639.831 86.8841 637.737 88.7959 635.006 90.374C632.275 91.8914 629.088 92.65 625.447 92.65C621.441 92.65 617.769 91.6182 614.431 89.5546C611.153 87.491 608.543 84.6384 606.601 80.9967C604.659 77.2943 603.688 73.0457 603.688 68.2509C603.688 63.456 604.659 59.2377 606.601 55.5961C608.543 51.8937 611.153 49.0107 614.431 46.9471C617.769 44.8835 621.441 43.8517 625.447 43.8517C629.088 43.8517 632.275 44.6407 635.006 46.2188C637.737 47.7361 639.831 49.648 641.288 51.9544H641.652V45.3084H649.027V89.9188C649.027 95.0778 648.025 99.3568 646.022 102.756C644.08 106.155 641.409 108.673 638.01 110.312C634.672 112.012 630.849 112.861 626.539 112.861ZM626.539 85.6398C629.27 85.6398 631.789 84.9722 634.096 83.6369C636.402 82.2409 638.223 80.238 639.558 77.6282C640.954 75.0183 641.652 71.8925 641.652 68.2509C641.652 64.4878 640.954 61.3317 639.558 58.7825C638.223 56.1727 636.402 54.2001 634.096 52.8648C631.789 51.5295 629.27 50.8619 626.539 50.8619C623.808 50.8619 621.289 51.5599 618.983 52.9559C616.676 54.2911 614.825 56.2637 613.429 58.8736C612.033 61.4227 611.335 64.5485 611.335 68.2509C611.335 71.9532 612.033 75.1093 613.429 77.7192C614.825 80.2684 616.676 82.2409 618.983 83.6369C621.289 84.9722 623.808 85.6398 626.539 85.6398Z" fill="currentColor"></path>
+            <path d="M588.94 91.7396V45.3083H596.679V91.7396H588.94ZM592.764 36.7504C591.247 36.7504 589.942 36.2042 588.849 35.1117C587.757 34.0192 587.211 32.7142 587.211 31.1969C587.211 29.6188 587.757 28.3139 588.849 27.2821C589.942 26.1896 591.247 25.6433 592.764 25.6433C594.342 25.6433 595.647 26.1896 596.679 27.2821C597.772 28.3139 598.318 29.6188 598.318 31.1969C598.318 32.7142 597.772 34.0192 596.679 35.1117C595.647 36.2042 594.342 36.7504 592.764 36.7504Z" fill="currentColor"></path>
+            <path d="M554.23 52.3186V45.3084H562.424V32.1984H570.162V45.3084H581.542V52.3186H570.162V77.6282C570.162 80.238 570.678 82.1802 571.71 83.4548C572.802 84.6687 574.411 85.2757 576.535 85.2757C577.506 85.2757 578.417 85.1543 579.266 84.9115C580.116 84.608 580.936 84.2135 581.725 83.7279V91.2844C580.753 91.6486 579.752 91.9217 578.72 92.1038C577.688 92.3466 576.566 92.4679 575.352 92.4679C571.467 92.4679 568.341 91.3148 565.974 89.0084C563.607 86.6413 562.424 83.4852 562.424 79.54V52.3186H554.23Z" fill="currentColor"></path>
+            <path d="M509.898 91.7396V45.3084H517.272V52.1365H517.636C518.85 49.8908 520.823 47.9486 523.554 46.3098C526.346 44.6711 529.381 43.8517 532.658 43.8517C538.364 43.8517 542.643 45.5208 545.495 48.859C548.409 52.1365 549.865 56.5065 549.865 61.969V91.7396H542.127V63.1525C542.127 58.6611 541.034 55.505 538.849 53.6842C536.725 51.8027 533.963 50.8619 530.564 50.8619C528.015 50.8619 525.77 51.5902 523.827 53.0469C521.885 54.4429 520.368 56.2637 519.275 58.5094C518.183 60.7551 517.636 63.1222 517.636 65.6107V91.7396H509.898Z" fill="currentColor"></path>
+            <path d="M446.449 91.7396L471.212 26.5538H479.952L504.716 91.7396H496.249L489.603 73.8044H461.562L454.916 91.7396H446.449ZM486.963 66.5211L478.314 43.0323L475.764 36.0221H475.4L472.851 43.0323L464.202 66.5211H486.963Z" fill="currentColor"></path>
+          </svg>
         </div>
       </section>
     </main>
@@ -712,7 +715,6 @@
 
     <!-- INTERACTIVE BEHAVIORS (SCRIPTS) -->
     <script>
-      // 1. Preloader lifecycle
       function initPreloader() {
         const preloader = document.getElementById('preloader');
         if (!preloader) return;
@@ -730,7 +732,6 @@
         }, duration);
       }
 
-      // 2. Nav scroll effect and Hamburger toggle
       function initNav() {
         const header = document.getElementById('main-header');
         const menuBtn = document.getElementById('menu-btn');
@@ -742,11 +743,11 @@
 
         window.addEventListener('scroll', () => {
           if (window.scrollY > 40) {
-            header.classList.remove('bg-transparent', 'py-5');
-            header.classList.add('bg-black/95', 'py-4', 'backdrop-blur-md');
+            header.classList.remove('bg-transparent');
+            header.classList.add('bg-black/95', 'backdrop-blur-md');
           } else {
-            header.classList.remove('bg-black/95', 'py-4', 'backdrop-blur-md');
-            header.classList.add('bg-transparent', 'py-5');
+            header.classList.remove('bg-black/95', 'backdrop-blur-md');
+            header.classList.add('bg-transparent');
           }
         }, { passive: true });
 
@@ -780,62 +781,27 @@
         });
       }
 
-      // 3. Hero video playback & entry animations
+      // Hero video playback handling (Ensures local video scenic_1 plays cleanly without prematurely triggering fallback)
       function initHero() {
         const heroVideo = document.getElementById('hero-video');
         if (heroVideo) {
           heroVideo.playbackRate = 0.75;
           heroVideo.muted = true;
-          
-          let playAttempted = false;
-          let fallbackTriggered = false;
+          heroVideo.playsInline = true;
 
-          function triggerFallback() {
-            if (fallbackTriggered) return;
-            fallbackTriggered = true;
-            console.warn("Local video failed to play. Activating H.264 CDN fallback stream...");
-            heroVideo.src = "https://cdn.coverr.co/videos/coverr-sun-shining-over-the-ocean-2178/1080p.mp4";
-            heroVideo.load();
-            heroVideo.play().catch(err => console.error("Fallback load failed:", err));
-          }
-
-          heroVideo.addEventListener('error', (e) => {
-            console.error("Hero video loading error details:", heroVideo.error);
-            triggerFallback();
-          });
-          
           const playPromise = heroVideo.play();
           if (playPromise !== undefined) {
-            playPromise.then(() => {
-              playAttempted = true;
-            }).catch(error => {
-              console.log("Autoplay blocked, installing fallback interaction listener", error);
-              const forcePlayOnUserInteraction = () => {
-                heroVideo.play().then(() => {
-                  playAttempted = true;
-                  setTimeout(() => {
-                    if (heroVideo.currentTime === 0) {
-                      triggerFallback();
-                    }
-                  }, 1000);
-                }).catch(() => {
-                  triggerFallback();
-                });
-                document.removeEventListener('click', forcePlayOnUserInteraction);
-                document.removeEventListener('touchstart', forcePlayOnUserInteraction);
-                document.removeEventListener('keydown', forcePlayOnUserInteraction);
+            playPromise.catch(error => {
+              console.log("Autoplay blocked on mobile, adding tap-to-play listener", error);
+              const forcePlay = () => {
+                heroVideo.play().catch(() => {});
+                document.removeEventListener('touchstart', forcePlay);
+                document.removeEventListener('click', forcePlay);
               };
-              document.addEventListener('click', forcePlayOnUserInteraction);
-              document.addEventListener('touchstart', forcePlayOnUserInteraction);
-              document.addEventListener('keydown', forcePlayOnUserInteraction);
+              document.addEventListener('touchstart', forcePlay);
+              document.addEventListener('click', forcePlay);
             });
           }
-
-          setTimeout(() => {
-            if (playAttempted && heroVideo.currentTime === 0) {
-              triggerFallback();
-            }
-          }, 3000);
         }
 
         setTimeout(() => {
@@ -850,7 +816,6 @@
         }, 100);
       }
 
-      // 4. Scroll Reveal Intersection Observer
       function initScrollReveal() {
         const revealElements = document.querySelectorAll('[data-reveal]');
         const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
@@ -885,7 +850,6 @@
         });
       }
 
-      // 5. Video Category Gallery Modal Logic
       const categoryVideos = {
         wedding: [
           { title: "The Meridian Estate (Aerial Walkthrough)", url: "https://cdn.coverr.co/videos/coverr-bird-s-eye-view-of-a-wedding-268/1080p.mp4" },
@@ -983,7 +947,6 @@
         });
       }
 
-      // 7. Right HUD
       function initHUD() {
         const hudRight = document.getElementById('hud-right-container');
         const altNum = document.getElementById('hud-alt-num');
@@ -1037,7 +1000,6 @@
         }, { passive: true });
       }
 
-      // 8. 3D Gimbal Card Tilt Effect
       function initCardTilt() {
         if (window.matchMedia('(pointer: coarse)').matches) return;
 
@@ -1069,7 +1031,6 @@
         });
       }
 
-      // Bootstrapper
       document.addEventListener('DOMContentLoaded', () => {
         initPreloader();
         initNav();
