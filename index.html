@@ -2,19 +2,26 @@
 <html lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#000000" />
     <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <title>ANTIGRAVITY — Luxury Drone Cinematography</title>
     <meta name="description" content="An ultra-luxury drone cinematography studio crafting gravity-defying aerial films for Hollywood productions, elite real estate, and heritage brands." />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <!-- Google Sans Flex & Google Sans Webfont integration -->
+    <!-- Official Google Sans Flex font import directly matching https://antigravity.google/ -->
+    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,ROND@8..144,-10..0,25..150,300..700,0..100&family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap" rel="stylesheet" />
     <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,wght@8..144,300;400;500;600;700&family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap" rel="stylesheet" />
     
-    <!-- Global JS Error Diagnostic Banner -->
+    <!-- Script to immediately reset scroll position to top on every page refresh -->
     <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+
       window.onerror = function(message, source, lineno, colno, error) {
         const errorDiv = document.createElement('div');
         errorDiv.style.position = 'fixed';
@@ -41,7 +48,7 @@
         theme: {
           extend: {
             fontFamily: {
-              // Google Sans set globally matching https://antigravity.google/
+              // Google Sans Flex set globally matching https://antigravity.google/
               sans: ['"Google Sans Flex"', '"Product Sans"', '"Google Sans"', 'Outfit', 'Inter', 'system-ui', 'sans-serif'],
               serif: ['"Google Sans Flex"', '"Product Sans"', '"Google Sans"', 'Outfit', 'sans-serif'],
             },
@@ -144,14 +151,11 @@
       class="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none z-0 text-primary opacity-[0.015] w-[60vh] h-[60vh]"
     >
       <svg viewBox="0 0 100 100" fill="none" class="w-full h-full">
-        <!-- Center square -->
         <rect x="42" y="42" width="16" height="16" stroke="currentColor" stroke-width="0.5" fill="none" />
-        <!-- Arms -->
         <path d="M42 42 L22 22" stroke="currentColor" stroke-width="0.5" fill="none" />
         <path d="M58 42 L78 22" stroke="currentColor" stroke-width="0.5" fill="none" />
         <path d="M42 58 L22 78" stroke="currentColor" stroke-width="0.5" fill="none" />
         <path d="M58 58 L78 78" stroke="currentColor" stroke-width="0.5" fill="none" />
-        <!-- Rotors -->
         <circle cx="22" cy="22" r="12" stroke="currentColor" stroke-width="0.5" fill="none" />
         <circle cx="78" cy="22" r="12" stroke="currentColor" stroke-width="0.5" fill="none" />
         <circle cx="22" cy="78" r="12" stroke="currentColor" stroke-width="0.5" fill="none" />
@@ -159,7 +163,7 @@
       </svg>
     </div>
 
-    <!-- RIGHT HUD: Scroll-linked Descending Altitude Meter Scale (Black color, starts scrolling as soon as it appears) -->
+    <!-- RIGHT HUD: Scroll-linked Descending Altitude Meter Scale -->
     <div
       id="hud-right-container"
       class="fixed right-3 md:right-6 top-1/2 -translate-y-1/2 z-40 flex flex-row gap-2 md:gap-4 items-center font-mono pointer-events-none select-none opacity-0 transition-opacity duration-700 text-black scale-90 md:scale-100"
@@ -170,7 +174,6 @@
       </div>
       <!-- Altitude scale bar (Ruler) -->
       <div class="relative w-2 md:w-3 h-36 md:h-48 border-r border-black flex flex-col justify-between py-1 text-[7px] md:text-[8px] text-black">
-        <!-- Scale notches -->
         <span class="w-1.5 md:w-2 h-px bg-black self-end"></span>
         <span class="w-1 md:w-1.5 h-px bg-black self-end"></span>
         <span class="w-1.5 md:w-2 h-px bg-black self-end"></span>
@@ -179,7 +182,7 @@
         <span class="w-1 md:w-1.5 h-px bg-black self-end"></span>
         <span class="w-1.5 md:w-2 h-px bg-black self-end"></span>
         
-        <!-- Sliding notch pointer (Positioned relative to top for smooth movement down ruler) -->
+        <!-- Sliding notch pointer -->
         <div
           id="hud-alt-indicator"
           class="absolute right-0 w-1.5 md:w-2 h-1.5 md:w-2 bg-black rounded-full translate-x-1/2 -translate-y-1/2 transition-all duration-200 ease-out"
@@ -195,7 +198,6 @@
       style="position: fixed; inset: 0; z-index: 100; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #ffffff;"
     >
       <svg width="88" height="88" viewBox="0 0 100 100" fill="none" style="color: #000000;">
-        <!-- Center square -->
         <rect
           x="42" y="42" width="16" height="16"
           stroke="currentColor" stroke-width="1"
@@ -204,7 +206,6 @@
           fill="none"
           style="animation: drawPath 1s ease-in-out 0s forwards;"
         />
-        <!-- Arms -->
         <path
           d="M42 42 L22 22"
           stroke="currentColor" stroke-width="1"
@@ -237,7 +238,6 @@
           fill="none"
           style="animation: drawPath 0.6s ease-in-out 0.8s forwards;"
         />
-        <!-- Rotors -->
         <circle
           cx="22" cy="22" r="12"
           stroke="currentColor" stroke-width="1"
@@ -278,11 +278,10 @@
       </p>
     </div>
 
-    <!-- NAVIGATION (Header logo spaced, menu links compact and tighter with Google Sans) -->
-    <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-700 bg-transparent py-5">
+    <!-- NAVIGATION (Supports safe-area-inset-top to scroll seamlessly beneath Mobile Dynamic Island / Notch) -->
+    <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-700 bg-transparent py-5 pt-[calc(1.25rem+env(safe-area-inset-top))]">
       <nav class="w-full max-w-none px-6 md:px-12 lg:px-16 flex items-center justify-between">
-        <!-- Spaced brand name for luxury feel -->
-        <a href="#top" class="text-xl font-medium tracking-[0.55em] text-white uppercase transition-colors duration-700">
+        <a href="#top" class="text-lg sm:text-xl font-medium tracking-[0.35em] sm:tracking-[0.55em] text-white uppercase transition-colors duration-700">
           Antigravity
         </a>
         <ul class="hidden items-center gap-8 md:flex">
@@ -328,8 +327,8 @@
     </header>
 
     <main class="relative z-10">
-      <!-- HERO -->
-      <section id="top" class="relative flex h-screen items-center justify-center overflow-hidden">
+      <!-- HERO (Dynamic viewport height h-[100dvh], fluid responsive typography without perspective distortion) -->
+      <section id="top" class="relative flex h-[100dvh] items-center justify-center overflow-hidden">
         <div class="absolute inset-0">
           <video
             id="hero-video"
@@ -338,23 +337,23 @@
             loop
             playsinline
             preload="auto"
-            class="h-full w-full object-cover transition-transform duration-[2500ms] ease-[cubic-bezier(0.22,1,0.36,1)] scale-[1.15]"
+            class="h-full w-full object-cover transition-transform duration-[2500ms] ease-[cubic-bezier(0.22,1,0.36,1)] scale-100"
           >
-            <!-- Formatted with lowercase, uppercase, and CDN fallbacks inside the HTML tag -->
             <source src="scenic_1.mp4" type="video/mp4" />
             <source src="scenic_1.MP4" type="video/mp4" />
             <source src="https://cdn.coverr.co/videos/coverr-sun-shining-over-the-ocean-2178/1080p.mp4" type="video/mp4" />
           </video>
           <div class="absolute inset-0 bg-black/45"></div>
         </div>
-        <div class="relative z-10 flex flex-col items-center px-6 text-center">
-          <h1 id="hero-title" class="max-w-5xl text-5xl font-light leading-[1.1] text-white text-balance md:text-7xl lg:text-8xl opacity-0 translate-y-[30px] transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)]" style="letter-spacing: 0.55em;">
+        <div class="relative z-10 flex flex-col items-center px-4 sm:px-6 text-center max-w-full">
+          <!-- Fluid responsive letter tracking to prevent line overflow or perspective distortion on mobile screens -->
+          <h1 id="hero-title" class="w-full max-w-5xl text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-light leading-[1.15] text-white text-balance opacity-0 translate-y-[20px] transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] tracking-[0.2em] sm:tracking-[0.35em] md:tracking-[0.55em]">
             Perspective. Elevated.
           </h1>
         </div>
       </section>
 
-      <!-- PORTFOLIO GRID (Removed "Our work" tag above title) -->
+      <!-- PORTFOLIO GRID -->
       <section id="work" class="relative mx-auto max-w-[1400px] px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <div data-reveal class="transform translate-y-[30px] opacity-0">
           <h2 class="mb-16 max-w-2xl text-4xl font-light leading-tight text-foreground text-balance md:text-5xl">
@@ -381,12 +380,11 @@
                 style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0) 100%)"
               ></div>
               
-              <!-- Loader-themed SVG borders & spinning corner rotors on hover (White Accents) -->
+              <!-- Loader-themed SVG borders & spinning corner rotors on hover -->
               <div class="absolute inset-0 pointer-events-none z-20 transition-opacity duration-[800ms] ease-out opacity-0 group-hover:opacity-100">
                 <svg class="absolute inset-0 w-full h-full" fill="none" stroke="#ffffff" stroke-width="1.2">
                   <rect class="card-border-path" x="6" y="6" width="calc(100% - 12px)" height="calc(100% - 12px)" stroke-dasharray="1600" stroke-dashoffset="1600" />
                 </svg>
-                <!-- Top-Left Rotor -->
                 <div class="absolute top-3 left-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -394,7 +392,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Top-Right Rotor -->
                 <div class="absolute top-3 right-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -402,7 +399,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Bottom-Left Rotor -->
                 <div class="absolute bottom-3 left-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -410,7 +406,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Bottom-Right Rotor -->
                 <div class="absolute bottom-3 right-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -444,12 +439,10 @@
                 style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0) 100%)"
               ></div>
               
-              <!-- Loader-themed SVG borders & spinning corner rotors on hover (White Accents) -->
               <div class="absolute inset-0 pointer-events-none z-20 transition-opacity duration-[800ms] ease-out opacity-0 group-hover:opacity-100">
                 <svg class="absolute inset-0 w-full h-full" fill="none" stroke="#ffffff" stroke-width="1.2">
                   <rect class="card-border-path" x="6" y="6" width="calc(100% - 12px)" height="calc(100% - 12px)" stroke-dasharray="1600" stroke-dashoffset="1600" />
                 </svg>
-                <!-- Top-Left Rotor -->
                 <div class="absolute top-3 left-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -457,7 +450,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Top-Right Rotor -->
                 <div class="absolute top-3 right-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -465,7 +457,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Bottom-Left Rotor -->
                 <div class="absolute bottom-3 left-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -473,7 +464,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Bottom-Right Rotor -->
                 <div class="absolute bottom-3 right-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -507,12 +497,10 @@
                 style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0) 100%)"
               ></div>
               
-              <!-- Loader-themed SVG borders & spinning corner rotors on hover (White Accents) -->
               <div class="absolute inset-0 pointer-events-none z-20 transition-opacity duration-[800ms] ease-out opacity-0 group-hover:opacity-100">
                 <svg class="absolute inset-0 w-full h-full" fill="none" stroke="#ffffff" stroke-width="1.2">
                   <rect class="card-border-path" x="6" y="6" width="calc(100% - 12px)" height="calc(100% - 12px)" stroke-dasharray="1600" stroke-dashoffset="1600" />
                 </svg>
-                <!-- Top-Left Rotor -->
                 <div class="absolute top-3 left-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -520,7 +508,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Top-Right Rotor -->
                 <div class="absolute top-3 right-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -528,7 +515,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Bottom-Left Rotor -->
                 <div class="absolute bottom-3 left-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -536,7 +522,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Bottom-Right Rotor -->
                 <div class="absolute bottom-3 right-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -570,12 +555,10 @@
                 style="background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.25) 60%, rgba(0,0,0,0) 100%)"
               ></div>
               
-              <!-- Loader-themed SVG borders & spinning corner rotors on hover (White Accents) -->
               <div class="absolute inset-0 pointer-events-none z-20 transition-opacity duration-[800ms] ease-out opacity-0 group-hover:opacity-100">
                 <svg class="absolute inset-0 w-full h-full" fill="none" stroke="#ffffff" stroke-width="1.2">
                   <rect class="card-border-path" x="6" y="6" width="calc(100% - 12px)" height="calc(100% - 12px)" stroke-dasharray="1600" stroke-dashoffset="1600" />
                 </svg>
-                <!-- Top-Left Rotor -->
                 <div class="absolute top-3 left-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -583,7 +566,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Top-Right Rotor -->
                 <div class="absolute top-3 right-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -591,7 +573,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Bottom-Left Rotor -->
                 <div class="absolute bottom-3 left-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -599,7 +580,6 @@
                     <line x1="4" y1="12" x2="20" y2="12"></line>
                   </svg>
                 </div>
-                <!-- Bottom-Right Rotor -->
                 <div class="absolute bottom-3 right-3 text-white animate-spin" style="animation-duration: 3s;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                     <circle cx="12" cy="12" r="8"></circle>
@@ -624,7 +604,6 @@
         class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-background/95 backdrop-blur-xl opacity-0 pointer-events-none transition-all duration-500"
       >
         <div class="relative w-full max-w-5xl bg-background border border-border p-6 md:p-8 lg:p-10 flex flex-col gap-6 max-h-[90vh] overflow-y-auto shadow-2xl">
-          <!-- Close Button -->
           <button
             id="close-modal-btn"
             class="absolute top-4 right-4 md:top-6 md:right-6 text-muted-foreground hover:text-foreground transition-colors p-2"
@@ -636,15 +615,12 @@
             </svg>
           </button>
 
-          <!-- Modal Header -->
           <div class="text-left">
             <p id="modal-category-subtitle" class="text-[10px] font-light tracking-[0.4em] text-muted-foreground uppercase mb-2">Category</p>
             <h2 id="modal-category-title" class="text-3xl font-light text-foreground md:text-4xl">Wedding Collection</h2>
           </div>
 
-          <!-- Modal Content Grid -->
           <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">
-            <!-- Big Player -->
             <div class="lg:col-span-2 aspect-[16/9] bg-black border border-border overflow-hidden relative group">
               <video
                 id="modal-main-player"
@@ -657,24 +633,21 @@
               </video>
             </div>
 
-            <!-- Playlist Selection -->
             <div class="flex flex-col gap-4 max-h-[40vh] lg:max-h-[50vh] overflow-y-auto pr-2">
               <p class="text-[10px] font-light tracking-[0.2em] text-muted-foreground uppercase mb-1">Available Reels</p>
               <div id="modal-playlist-container" class="flex flex-col gap-3">
-                <!-- Dynamically populated playlist items -->
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      <!-- ENGAGING CLIENT CALLOUT (Removed "Perspective Redefined" tag above title) -->
+      <!-- ENGAGING CLIENT CALLOUT -->
       <section id="engage" class="border-t border-border bg-background py-16 md:py-20 text-center px-6 relative overflow-hidden">
         <div data-reveal class="max-w-3xl mx-auto flex flex-col items-center transform translate-y-[30px] opacity-0 relative z-10">
           <h2 class="text-4xl font-light leading-tight text-foreground md:text-5xl lg:text-6xl text-balance">
             Ready to elevate your event?
           </h2>
-          <!-- Wedding focused copy -->
           <p class="mt-8 text-sm font-light leading-relaxed tracking-[0.1em] text-muted-foreground text-pretty max-w-xl font-sans">
             Specializing in capturing the timeless romance and elegance of your wedding day with cinematic drone cinematography, alongside elite estate highlights and brand campaigns. Let us preserve your extraordinary memories.
           </p>
@@ -684,7 +657,7 @@
         </div>
       </section>
 
-      <!-- CONTACT SECTION (Removed "Contact" tag above title) -->
+      <!-- CONTACT SECTION (Configured exact links for Voice call 9500147241, WhatsApp 9600182652, and Instagram _iamvignesh_) -->
       <section id="contact-section" class="border-t border-border bg-background py-16 md:py-20">
         <div data-reveal class="mx-auto max-w-4xl px-6 transform translate-y-[30px] opacity-0">
           <div id="contact" class="text-center font-sans">
@@ -693,36 +666,35 @@
             </h2>
             
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mt-12 max-w-4xl mx-auto font-sans">
-              <!-- Call Block -->
-              <a href="tel:+13105550190" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+              <!-- Call Block: Voice Call redirect to 9500147241 -->
+              <a href="tel:9500147241" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
                 <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Voice</span>
                 <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">Call Us</span>
-                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">+1 (310) 555-0190</span>
+                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">+91 9500147241</span>
               </a>
               
-              <!-- WhatsApp Block -->
-              <a href="https://wa.me/13105550190" target="_blank" rel="noopener" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+              <!-- WhatsApp Block: Redirect to wa.me/9600182652 -->
+              <a href="https://wa.me/9600182652" target="_blank" rel="noopener" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
                 <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Message</span>
                 <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">WhatsApp</span>
-                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">Start Chat</span>
+                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">+91 9600182652</span>
               </a>
 
-              <!-- Instagram Block -->
-              <a href="https://instagram.com" target="_blank" rel="noopener" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
+              <!-- Instagram Block: Redirect to _iamvignesh_ profile -->
+              <a href="https://www.instagram.com/_iamvignesh_?igsh=OHZyMGY3bmZzZW1z&utm_source=qr" target="_blank" rel="noopener" class="group flex flex-col items-center p-8 md:p-10 border border-border rounded-[4px] bg-card hover:border-black transition-all duration-300">
                 <span class="text-[9px] font-light tracking-[0.3em] text-muted-foreground uppercase mb-3">Social</span>
                 <span class="text-lg font-medium text-foreground group-hover:text-black transition-colors">Instagram</span>
-                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">@antigravity.films</span>
+                <span class="text-xs text-muted-foreground mt-5 font-mono tracking-wide">@_iamvignesh_</span>
               </a>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- BRAND WATERMARK SECTION (Pristine Google Antigravity branding matching https://antigravity.google/) -->
-      <section class="bg-background pt-16 pb-20 text-center px-6 relative z-10 overflow-hidden border-t border-border">
-        <div class="max-w-[1400px] mx-auto flex flex-col items-center">
-          <!-- Colossal Google Sans Antigravity wordmark matching official site branding -->
-          <h2 class="text-[17vw] font-medium leading-none text-[#18181b] select-none tracking-tight font-sans">
+      <!-- BRAND WATERMARK SECTION (Faithfully matching https://antigravity.google/ Google Sans Flex format, size & tracking) -->
+      <section class="bg-background pt-20 pb-24 text-center px-6 relative z-10 overflow-hidden border-t border-border">
+        <div class="max-w-[1400px] mx-auto flex flex-col items-center justify-center">
+          <h2 class="text-[16vw] sm:text-[17vw] font-normal leading-none text-[#18181b] select-none tracking-[-0.035em] font-sans transition-all duration-300">
             Antigravity
           </h2>
         </div>
@@ -748,19 +720,17 @@
         const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const duration = reduced ? 300 : 2400;
 
-        // Fading out
         setTimeout(() => {
           preloader.style.opacity = '0';
           preloader.style.transition = 'opacity 0.8s ease-in-out';
         }, duration - 800);
 
-        // Completely remove
         setTimeout(() => {
           preloader.style.display = 'none';
         }, duration);
       }
 
-      // 2. Nav scroll effect and Hamburger toggle (Links remain white, background goes black)
+      // 2. Nav scroll effect and Hamburger toggle
       function initNav() {
         const header = document.getElementById('main-header');
         const menuBtn = document.getElementById('menu-btn');
@@ -770,7 +740,6 @@
         const menuBar3 = document.getElementById('menu-bar-3');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        // Scroll listener for header background only (text remains white at all times)
         window.addEventListener('scroll', () => {
           if (window.scrollY > 40) {
             header.classList.remove('bg-transparent', 'py-5');
@@ -781,7 +750,6 @@
           }
         }, { passive: true });
 
-        // Menu open/close logic
         let menuOpen = false;
         function toggleMenu() {
           menuOpen = !menuOpen;
@@ -812,12 +780,12 @@
         });
       }
 
-      // 3. Hero video playback rate & entry animations
+      // 3. Hero video playback & entry animations
       function initHero() {
         const heroVideo = document.getElementById('hero-video');
         if (heroVideo) {
           heroVideo.playbackRate = 0.75;
-          heroVideo.muted = true; // Programmatically mute to secure autoplay
+          heroVideo.muted = true;
           
           let playAttempted = false;
           let fallbackTriggered = false;
@@ -870,13 +838,7 @@
           }, 3000);
         }
 
-        // Trigger text & scale animations on load
         setTimeout(() => {
-          if (heroVideo) {
-            heroVideo.classList.remove('scale-[1.15]');
-            heroVideo.classList.add('scale-100');
-          }
-
           const title = document.getElementById('hero-title');
           const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
           
@@ -888,7 +850,7 @@
         }, 100);
       }
 
-      // 4. Scroll Reveal Intersection Observer (Throttled translate offset for performance)
+      // 4. Scroll Reveal Intersection Observer
       function initScrollReveal() {
         const revealElements = document.querySelectorAll('[data-reveal]');
         const EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
@@ -1021,7 +983,7 @@
         });
       }
 
-      // 7. Right HUD (Starts sliding down as soon as it fades in at half-hero scroll)
+      // 7. Right HUD
       function initHUD() {
         const hudRight = document.getElementById('hud-right-container');
         const altNum = document.getElementById('hud-alt-num');
@@ -1035,7 +997,6 @@
           const currentScroll = window.scrollY;
           const startScroll = heroHeight / 2;
 
-          // Toggle visibility: fade in at halfway point of hero section
           if (currentScroll > startScroll) {
             hudRight.classList.remove('opacity-0', 'pointer-events-none');
             hudRight.classList.add('opacity-60'); 
@@ -1044,7 +1005,6 @@
             hudRight.classList.add('opacity-0', 'pointer-events-none');
           }
 
-          // Calculate descending altitude from 120m to 0m (Starts scrolling IMMEDIATELY upon appearance)
           const scrollableArea = document.documentElement.scrollHeight - window.innerHeight - startScroll;
           if (scrollableArea > 0 && currentScroll >= startScroll) {
             const relativeScroll = Math.max(0, Math.min(1, (currentScroll - startScroll) / scrollableArea));
@@ -1054,7 +1014,6 @@
               altNum.textContent = `${currentAlt}m`;
             }
             if (altIndicator) {
-              // Update vertical position on the ruler scale starting immediately from 0% to 100%
               altIndicator.style.top = (relativeScroll * 100) + '%';
             }
           } else {
@@ -1062,7 +1021,6 @@
             if (altIndicator) altIndicator.style.top = '0%';
           }
           
-          // Rotate background compass
           if (compass) {
             compass.style.transform = `translate3d(-50%, -50%, 0) rotate(${currentScroll * 0.06}deg)`;
           }
@@ -1079,7 +1037,7 @@
         }, { passive: true });
       }
 
-      // 8. 3D Gimbal Card Tilt Effect (Smoother transitions using will-change and transform3d)
+      // 8. 3D Gimbal Card Tilt Effect
       function initCardTilt() {
         if (window.matchMedia('(pointer: coarse)').matches) return;
 
