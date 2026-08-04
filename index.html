@@ -14,26 +14,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,ROND@8..144,-10..0,25..150,300..700,0..100&family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap" rel="stylesheet" />
     <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
     
-    <!-- Scroll to top: runs before paint AND on iOS pageshow (back-forward cache) -->
+    <!-- Lock page scroll immediately until preloader completes: prevents any visible scroll jump -->
     <script>
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
-      // Runs inline immediately as HTML is parsed — before any rendering
+      // Immediately lock scroll so nothing jumps while page loads
       document.documentElement.scrollTop = 0;
-      // pagehide: set before leaving so next cold-load starts at 0
+      document.documentElement.style.overflow = 'hidden';
+
+      // pageshow covers both cold load AND iOS back-forward cache restores
+      window.addEventListener('pageshow', function() {
+        document.documentElement.scrollTop = 0;
+        window.scrollTo(0, 0);
+      });
       window.addEventListener('pagehide', function() {
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
-      });
-      // pageshow fires on both cold load AND back-forward cache restore on iOS Safari
-      window.addEventListener('pageshow', function(e) {
-        window.scrollTo(0, 0);
-        document.documentElement.scrollTop = 0;
-        if (document.body) document.body.scrollTop = 0;
-      });
-      window.addEventListener('DOMContentLoaded', function() {
-        window.scrollTo(0, 0);
       });
 
       window.onerror = function(message, source, lineno, colno, error) {
@@ -345,7 +342,7 @@
             loop
             playsinline
             webkit-playsinline
-            preload="auto"
+            preload="none"
             style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;"
           >
             <source src="scenic_1.mp4" type="video/mp4" />
@@ -730,18 +727,42 @@
       function initPreloader() {
         const preloader = document.getElementById('preloader');
         if (!preloader) return;
-        
-        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const duration = reduced ? 300 : 2400;
 
-        setTimeout(() => {
-          preloader.style.opacity = '0';
-          preloader.style.transition = 'opacity 0.8s ease-in-out';
-        }, duration - 800);
+        const MIN_ANIM_MS = 1800; // minimum time to show the loading animation
+        const startTime = Date.now();
 
-        setTimeout(() => {
-          preloader.style.display = 'none';
-        }, duration);
+        function revealPage() {
+          // Scroll to top WHILE preloader still covers everything — user sees nothing jump
+          window.scrollTo(0, 0);
+          document.documentElement.scrollTop = 0;
+          if (document.body) document.body.scrollTop = 0;
+
+          const elapsed = Date.now() - startTime;
+          const remaining = Math.max(0, MIN_ANIM_MS - elapsed);
+
+          setTimeout(() => {
+            // Fade preloader out
+            preloader.style.transition = 'opacity 0.6s ease-in-out';
+            preloader.style.opacity = '0';
+
+            setTimeout(() => {
+              preloader.style.display = 'none';
+              // Unlock scroll now that page is revealed at the correct position
+              document.documentElement.style.overflow = '';
+              // Final safety reset
+              window.scrollTo(0, 0);
+            }, 620);
+          }, remaining);
+        }
+
+        // Wait for the actual page load (DOMContentLoaded is not enough on mobile)
+        if (document.readyState === 'complete') {
+          revealPage();
+        } else {
+          window.addEventListener('load', revealPage, { once: true });
+          // Safety timeout: if load event never fires (e.g. network error), still reveal after 6s
+          setTimeout(revealPage, 6000);
+        }
       }
 
       function initNav() {
