@@ -14,19 +14,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,ROND@8..144,-10..0,25..150,300..700,0..100&family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap" rel="stylesheet" />
     <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
     
-    <!-- Enforce scroll to top on every refresh across all browsers -->
+    <!-- Scroll to top BEFORE first paint on every refresh -->
     <script>
+      // Set scroll position to 0 immediately on script parse (before DOM ready)
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
-      window.scrollTo(0, 0);
-      window.addEventListener('beforeunload', function () {
+      // Scroll to top immediately — runs inline before any rendering
+      document.documentElement.scrollTop = 0;
+      document.body && (document.body.scrollTop = 0);
+      // Also lock it on unload so next load starts at 0
+      window.addEventListener('pagehide', function() {
         window.scrollTo(0, 0);
       });
-      window.addEventListener('load', function () {
-        setTimeout(function () {
-          window.scrollTo(0, 0);
-        }, 10);
+      window.addEventListener('DOMContentLoaded', function() {
+        window.scrollTo(0, 0);
       });
 
       window.onerror = function(message, source, lineno, colno, error) {
@@ -281,7 +283,7 @@
     </div>
 
     <!-- NAVIGATION HEADER (Seamless full-width black top bar extending under Dynamic Island / Status Bar) -->
-    <header id="main-header" class="fixed inset-x-0 top-0 z-50 transition-all duration-700 bg-black py-4 pt-[calc(1rem+env(safe-area-inset-top,0px))]">
+    <header id="main-header" class="fixed inset-x-0 top-0 z-50 bg-black py-4 pt-[calc(1rem+env(safe-area-inset-top,0px))]">
       <nav class="w-full max-w-none px-6 md:px-12 lg:px-16 flex items-center justify-between">
         <a href="#top" class="text-base sm:text-xl font-medium tracking-[0.35em] sm:tracking-[0.55em] text-white uppercase transition-colors duration-700">
           Antigravity
@@ -328,9 +330,9 @@
     </header>
 
     <main class="relative z-10">
-      <!-- HERO (Heading text updated to 'Elevated your perspective', perfectly centered, mediumly spaced; video 100% full cover fit) -->
-      <section id="top" class="relative flex h-[100dvh] min-h-[500px] w-full items-center justify-center overflow-hidden bg-black">
-        <div class="absolute inset-0 w-full h-full">
+      <!-- HERO (Heading text 'Elevate your perspective', perfectly centered, mediumly spaced; video 100% full screen cover fit) -->
+      <section id="top" class="relative flex w-full items-center justify-center overflow-hidden bg-black" style="height: 100dvh; min-height: 100svh;">
+        <div class="absolute inset-0 w-full h-full" style="position:absolute;top:0;left:0;right:0;bottom:0;">
           <video
             id="hero-video"
             autoplay
@@ -339,7 +341,7 @@
             playsinline
             webkit-playsinline
             preload="auto"
-            class="h-full w-full object-cover object-center pointer-events-none"
+            style="position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;object-position:center;"
           >
             <source src="scenic_1.mp4" type="video/mp4" />
             <source src="scenic_1.MP4" type="video/mp4" />
@@ -347,10 +349,10 @@
           </video>
           <div class="absolute inset-0 bg-black/45"></div>
         </div>
-        <div class="relative z-10 flex flex-col items-center justify-center px-6 text-center max-w-full my-auto">
-          <!-- Text updated to 'Elevated your perspective', exactly centered, mediumly spaced (tracking-[0.2em] sm:tracking-[0.25em]) -->
+        <div class="relative z-10 flex flex-col items-center justify-center px-6 text-center" style="position:relative;z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;">
+          <!-- Corrected to 'Elevate your perspective', exactly centered, mediumly spaced -->
           <h1 id="hero-title" class="w-full max-w-4xl text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-light leading-[1.2] text-white text-center opacity-0 translate-y-[20px] transition-all duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] tracking-[0.2em] sm:tracking-[0.25em]">
-            Elevated your perspective
+            Elevate your perspective
           </h1>
         </div>
       </section>
@@ -358,7 +360,7 @@
       <!-- PORTFOLIO GRID -->
       <section id="work" class="relative mx-auto max-w-[1400px] px-6 md:px-12 lg:px-16 py-16 md:py-20">
         <div data-reveal class="transform translate-y-[30px] opacity-0">
-          <h2 class="mb-16 max-w-2xl text-4xl font-light leading-tight text-foreground text-balance md:text-5xl">
+          <h2 class="mb-10 md:mb-16 max-w-2xl text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-tight text-foreground text-balance">
             A portfolio of altitude
           </h2>
         </div>
@@ -687,10 +689,11 @@
         </div>
       </section>
 
-      <!-- BRAND WATERMARK SECTION (LITERAL FULL SVG VECTOR BRANDING FROM REFERENCE https://antigravity.google/) -->
+      <!-- BRAND WATERMARK SECTION: Full Google Antigravity logo from reference https://antigravity.google/ -->
+      <!-- The reference branding above the footer is the combined Google Antigravity logo: colorful icon + Google Antigravity wordmark -->
       <section class="bg-background pt-20 pb-24 text-center px-6 relative z-10 overflow-hidden border-t border-border flex items-center justify-center">
-        <div class="w-full max-w-[1200px] mx-auto flex items-center justify-center px-4">
-          <!-- Full literal SVG Vector from reference site https://antigravity.google/ with viewBox="0 0 869 113" -->
+        <div class="w-full max-w-[900px] mx-auto flex items-center justify-center px-4">
+          <!-- Full literal SVG logo from https://antigravity.google/ — the header logo element (icon + Google + Antigravity text) rendered large -->
           <svg viewBox="0 0 869 113" class="w-full h-auto text-[#18181b] select-none block" fill="none" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_6001_463)">
               <path d="M839.836 109.037C839.654 109.462 839.442 109.918 839.199 110.403C838.956 110.949 838.805 111.283 838.744 111.405H830.732C831.096 110.616 831.491 109.735 831.916 108.764C832.341 107.854 832.856 106.731 833.463 105.396C833.828 104.607 834.161 103.878 834.465 103.211C834.768 102.543 835.102 101.784 835.466 100.935C835.891 100.146 836.377 99.1443 836.923 97.9304L841.111 88.8262L821.901 45.3083H830.277L844.844 79.8131H845.026L859.046 45.3083H867.422L843.387 100.753C843.144 101.299 842.75 102.149 842.203 103.302C841.718 104.516 841.232 105.669 840.747 106.761C840.322 107.915 840.018 108.673 839.836 109.037Z" fill="currentColor"></path>
@@ -783,15 +786,8 @@
         const menuBar3 = document.getElementById('menu-bar-3');
         const mobileLinks = document.querySelectorAll('.mobile-link');
 
-        window.addEventListener('scroll', () => {
-          if (window.scrollY > 40) {
-            header.classList.remove('bg-transparent');
-            header.classList.add('bg-black/95', 'backdrop-blur-md');
-          } else {
-            header.classList.remove('bg-black/95', 'backdrop-blur-md');
-            header.classList.add('bg-transparent');
-          }
-        }, { passive: true });
+        // Header stays black at all times for seamless status bar integration
+        // No transparency change on scroll — consistent black background
 
         let menuOpen = false;
         function toggleMenu() {
