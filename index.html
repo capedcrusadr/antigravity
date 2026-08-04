@@ -715,7 +715,7 @@
             aria-label="Antigravity"
             style="
               font-family: 'Google Sans Flex', 'Google Sans', 'Product Sans', 'Outfit', sans-serif;
-              font-weight: 400;
+              font-weight: 500;
               font-size: clamp(72px, 21vw, 300px);
               letter-spacing: -0.04em;
               color: #18181b;
@@ -725,7 +725,7 @@
               overflow: visible;
               display: inline;
             "
-          ><span style="vertical-align: baseline;">Antigravi</span><span style="vertical-align: middle; position: relative; letter-spacing: -0.04em;">ty</span></span>
+          ><span style="vertical-align: baseline;">Antigravi</span><span style="position: relative; bottom: 0.35em; letter-spacing: -0.04em;">ty</span></span>
         </div>
       </section>
     </main>
@@ -746,16 +746,15 @@
         if (!preloader) return;
 
         // Animation ends at ~1.9s (last circle: delay 1.2s + duration 0.7s)
-        // Set minimum slightly above that so animation always fully completes.
         const MIN_ANIM_MS = 2200;
         const startTime = Date.now();
-        let revealed = false; // guard: only ever run once
+        let revealed = false;
 
         function revealPage() {
           if (revealed) return;
           revealed = true;
 
-          // Preloader position:fixed covers the page — safe to scroll here without jump
+          // Preloader position:fixed covers the page — safe to scroll here without any visible jump
           window.scrollTo(0, 0);
           document.documentElement.scrollTop = 0;
           if (document.body) document.body.scrollTop = 0;
@@ -770,15 +769,23 @@
           }, remaining);
         }
 
-        // window.load fires AFTER browser scroll-restoration is done
-        // and AFTER all non-video resources are ready. Hero video is preload="none"
-        // so it does NOT block this event — load fires fast.
-        if (document.readyState === 'complete') {
-          revealPage();
+        // Use DOMContentLoaded + double requestAnimationFrame instead of window.load.
+        // window.load waits for the Tailwind CDN script (~400KB) to finish — very slow on mobile.
+        // DOMContentLoaded fires as soon as HTML is parsed.
+        // The double RAF gives the browser 2 paint cycles to complete its own scroll
+        // restoration before we call scrollTo(0,0), so our reset is always the final word.
+        function waitForRAFAndReveal() {
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              revealPage();
+            });
+          });
+        }
+
+        if (document.readyState !== 'loading') {
+          waitForRAFAndReveal();
         } else {
-          window.addEventListener('load', revealPage, { once: true });
-          // NOTE: No safety setTimeout here — a setTimeout that fires after page load
-          // could interrupt the user mid-session. window.load is reliable.
+          document.addEventListener('DOMContentLoaded', waitForRAFAndReveal, { once: true });
         }
       }
 
