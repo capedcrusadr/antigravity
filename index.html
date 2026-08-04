@@ -19,12 +19,14 @@
       if ('scrollRestoration' in history) {
         history.scrollRestoration = 'manual';
       }
-      // Immediately lock scroll so nothing jumps while page loads
+      // Immediately reset scroll position before any paint
       document.documentElement.scrollTop = 0;
-      document.documentElement.style.overflow = 'hidden';
+      try { window.scrollTo(0, 0); } catch(e) {}
+      // NOTE: Do NOT set overflow:hidden on document — this defers browser scroll
+      // restoration and causes a forced scroll jump when the overflow is later removed.
+      // The preloader's position:fixed cover is the visual solution instead.
 
-      // pagehide: reset position before leaving so next cold-load starts at 0
-      // NOTE: pageshow is intentionally NOT used here — it fires mid-session too
+      // pagehide: save position=0 before leaving so next cold load starts at top
       window.addEventListener('pagehide', function() {
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
@@ -688,24 +690,27 @@
         </div>
       </section>
 
-      <!-- BRAND WATERMARK: Massive full-width Antigravity typographic watermark matching reference https://antigravity.google/ footer -->
-      <!-- Reference: huge bold Google Sans text, edge-to-edge, descender of 'y' intentionally visible below baseline -->
-      <section class="bg-background border-t border-border relative z-10" style="padding-top: 3rem; overflow: visible; padding-bottom: 0;">
-        <div style="width:100%; overflow: visible; display:flex; align-items:flex-end; justify-content:center; line-height:1;">
+      <!-- BRAND WATERMARK: Massive full-width Antigravity typographic watermark -->
+      <!-- The text is intentionally oversized so edges overflow, matching reference -->
+      <section class="bg-background border-t border-border relative z-10" style="padding-top: 2.5rem; padding-bottom: 0; overflow: visible;">
+        <div style="width:100%; overflow: visible; display:flex; align-items:flex-end; justify-content:center; line-height:0.85;">
           <span
             aria-label="Antigravity"
             style="
               display: block;
               font-family: 'Google Sans Flex', 'Google Sans', 'Product Sans', 'Outfit', sans-serif;
               font-weight: 700;
-              font-size: clamp(68px, 18.5vw, 270px);
+              font-size: clamp(72px, 21vw, 300px);
               letter-spacing: -0.04em;
               color: #18181b;
               white-space: nowrap;
-              line-height: 1;
+              line-height: 0.85;
               user-select: none;
-              padding: 0 1vw;
+              padding: 0;
               overflow: visible;
+              display: block;
+              width: 100%;
+              text-align: center;
             "
           >Antigravity</span>
         </div>
@@ -727,15 +732,17 @@
         const preloader = document.getElementById('preloader');
         if (!preloader) return;
 
-        const MIN_ANIM_MS = 1200; // minimum animation time — just enough to see it
+        // Animation ends at ~1.9s (last circle: delay 1.2s + duration 0.7s)
+        // Set minimum slightly above that so animation always fully completes.
+        const MIN_ANIM_MS = 2200;
         const startTime = Date.now();
-        let revealed = false; // guard: prevent double-reveal
+        let revealed = false; // guard: only ever run once
 
         function revealPage() {
           if (revealed) return;
           revealed = true;
 
-          // Reset scroll WHILE preloader still covers everything — zero visible jump
+          // Preloader position:fixed covers the page — safe to scroll here without jump
           window.scrollTo(0, 0);
           document.documentElement.scrollTop = 0;
           if (document.body) document.body.scrollTop = 0;
@@ -744,27 +751,22 @@
           const remaining = Math.max(0, MIN_ANIM_MS - elapsed);
 
           setTimeout(() => {
-            preloader.style.transition = 'opacity 0.5s ease-in-out';
+            preloader.style.transition = 'opacity 0.55s ease-in-out';
             preloader.style.opacity = '0';
-
-            setTimeout(() => {
-              preloader.style.display = 'none';
-              // Unlock page scroll — position is already correct
-              document.documentElement.style.overflow = '';
-            }, 520);
+            setTimeout(() => { preloader.style.display = 'none'; }, 560);
           }, remaining);
         }
 
-        // DOMContentLoaded fires as soon as HTML is parsed — does NOT wait for
-        // CDN videos, external fonts or images. Much faster than window.load on mobile.
-        if (document.readyState !== 'loading') {
-          // Already parsed (e.g. cached page)
+        // window.load fires AFTER browser scroll-restoration is done
+        // and AFTER all non-video resources are ready. Hero video is preload="none"
+        // so it does NOT block this event — load fires fast.
+        if (document.readyState === 'complete') {
           revealPage();
         } else {
-          document.addEventListener('DOMContentLoaded', revealPage, { once: true });
+          window.addEventListener('load', revealPage, { once: true });
+          // NOTE: No safety setTimeout here — a setTimeout that fires after page load
+          // could interrupt the user mid-session. window.load is reliable.
         }
-        // Hard safety cap: reveal within 4s no matter what
-        setTimeout(revealPage, 4000);
       }
 
       function initNav() {
