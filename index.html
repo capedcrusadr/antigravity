@@ -23,11 +23,8 @@
       document.documentElement.scrollTop = 0;
       document.documentElement.style.overflow = 'hidden';
 
-      // pageshow covers both cold load AND iOS back-forward cache restores
-      window.addEventListener('pageshow', function() {
-        document.documentElement.scrollTop = 0;
-        window.scrollTo(0, 0);
-      });
+      // pagehide: reset position before leaving so next cold-load starts at 0
+      // NOTE: pageshow is intentionally NOT used here — it fires mid-session too
       window.addEventListener('pagehide', function() {
         window.scrollTo(0, 0);
         document.documentElement.scrollTop = 0;
@@ -692,21 +689,23 @@
       </section>
 
       <!-- BRAND WATERMARK: Massive full-width Antigravity typographic watermark matching reference https://antigravity.google/ footer -->
-      <section class="bg-background overflow-hidden border-t border-border relative z-10" style="padding-top: 4rem; padding-bottom: 0;">
-        <div style="width:100%; overflow:hidden; display:flex; align-items:flex-end; justify-content:center;">
+      <!-- Reference: huge bold Google Sans text, edge-to-edge, descender of 'y' intentionally visible below baseline -->
+      <section class="bg-background border-t border-border relative z-10" style="padding-top: 3rem; overflow: visible; padding-bottom: 0;">
+        <div style="width:100%; overflow: visible; display:flex; align-items:flex-end; justify-content:center; line-height:1;">
           <span
             aria-label="Antigravity"
             style="
               display: block;
               font-family: 'Google Sans Flex', 'Google Sans', 'Product Sans', 'Outfit', sans-serif;
               font-weight: 700;
-              font-size: clamp(72px, 19vw, 280px);
-              letter-spacing: -0.03em;
+              font-size: clamp(68px, 18.5vw, 270px);
+              letter-spacing: -0.04em;
               color: #18181b;
               white-space: nowrap;
-              line-height: 0.88;
+              line-height: 1;
               user-select: none;
-              padding: 0 2vw;
+              padding: 0 1vw;
+              overflow: visible;
             "
           >Antigravity</span>
         </div>
@@ -728,11 +727,15 @@
         const preloader = document.getElementById('preloader');
         if (!preloader) return;
 
-        const MIN_ANIM_MS = 1800; // minimum time to show the loading animation
+        const MIN_ANIM_MS = 1200; // minimum animation time — just enough to see it
         const startTime = Date.now();
+        let revealed = false; // guard: prevent double-reveal
 
         function revealPage() {
-          // Scroll to top WHILE preloader still covers everything — user sees nothing jump
+          if (revealed) return;
+          revealed = true;
+
+          // Reset scroll WHILE preloader still covers everything — zero visible jump
           window.scrollTo(0, 0);
           document.documentElement.scrollTop = 0;
           if (document.body) document.body.scrollTop = 0;
@@ -741,28 +744,27 @@
           const remaining = Math.max(0, MIN_ANIM_MS - elapsed);
 
           setTimeout(() => {
-            // Fade preloader out
-            preloader.style.transition = 'opacity 0.6s ease-in-out';
+            preloader.style.transition = 'opacity 0.5s ease-in-out';
             preloader.style.opacity = '0';
 
             setTimeout(() => {
               preloader.style.display = 'none';
-              // Unlock scroll now that page is revealed at the correct position
+              // Unlock page scroll — position is already correct
               document.documentElement.style.overflow = '';
-              // Final safety reset
-              window.scrollTo(0, 0);
-            }, 620);
+            }, 520);
           }, remaining);
         }
 
-        // Wait for the actual page load (DOMContentLoaded is not enough on mobile)
-        if (document.readyState === 'complete') {
+        // DOMContentLoaded fires as soon as HTML is parsed — does NOT wait for
+        // CDN videos, external fonts or images. Much faster than window.load on mobile.
+        if (document.readyState !== 'loading') {
+          // Already parsed (e.g. cached page)
           revealPage();
         } else {
-          window.addEventListener('load', revealPage, { once: true });
-          // Safety timeout: if load event never fires (e.g. network error), still reveal after 6s
-          setTimeout(revealPage, 6000);
+          document.addEventListener('DOMContentLoaded', revealPage, { once: true });
         }
+        // Hard safety cap: reveal within 4s no matter what
+        setTimeout(revealPage, 4000);
       }
 
       function initNav() {
