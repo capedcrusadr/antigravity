@@ -103,12 +103,15 @@
     <style>
       html {
         background-color: #000000;
+        overflow-x: hidden;
+        overscroll-behavior: none;
       }
       body {
         background-color: #ffffff;
         color: #0c0c0d;
         -webkit-font-smoothing: antialiased;
         overflow-x: hidden;
+        overscroll-behavior: none;
       }
       body, button, input, select, textarea, h1, h2, h3, h4, h5, h6, a {
         font-family: "Google Sans Flex", "Product Sans", "Google Sans", "Outfit", "Inter", sans-serif !important;
@@ -709,7 +712,7 @@
 
       <!-- BRAND WATERMARK: Massive full-width Antigravity typographic watermark -->
       <!-- 'ty' is vertically centred against cap-height of the rest, making it appear to float/fly from above -->
-      <section class="bg-background border-t border-border relative z-10" style="padding-top: 2.5rem; padding-bottom: 1.5rem; overflow: visible;">
+      <section class="bg-background border-t border-border relative z-10" style="padding-top: 2.5rem; padding-bottom: 1.5rem; overflow-x: clip; overflow-y: visible;">
         <div style="width:100%; overflow: visible; display:flex; align-items:baseline; justify-content:center;">
           <span
             aria-label="Antigravity"
