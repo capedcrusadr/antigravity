@@ -9,10 +9,27 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
     <title>ANTIGRAVITY — Luxury Drone Cinematography</title>
     <meta name="description" content="An ultra-luxury drone cinematography studio crafting gravity-defying aerial films for Hollywood productions, elite real estate, and heritage brands." />
+    <!-- Fonts: loaded asynchronously so they do NOT block window.load on mobile -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,ROND@8..144,-10..0,25..150,300..700,0..100&family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap" rel="stylesheet" />
-    <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,ROND@8..144,-10..0,25..150,300..700,0..100&family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Google+Sans+Flex:opsz,slnt,wdth,wght,ROND@8..144,-10..0,25..150,300..700,0..100&family=Outfit:wght@200;300;400;500;600;700&family=Inter:wght@200;300;400;500;600;700;850&display=swap" rel="stylesheet" />
+    </noscript>
+    <link
+      href="https://fonts.cdnfonts.com/css/google-sans"
+      rel="stylesheet"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link href="https://fonts.cdnfonts.com/css/google-sans" rel="stylesheet" />
+    </noscript>
     
     <!-- Lock page scroll immediately until preloader completes: prevents any visible scroll jump -->
     <script>
@@ -691,28 +708,24 @@
       </section>
 
       <!-- BRAND WATERMARK: Massive full-width Antigravity typographic watermark -->
-      <!-- The text is intentionally oversized so edges overflow, matching reference -->
-      <section class="bg-background border-t border-border relative z-10" style="padding-top: 2.5rem; padding-bottom: 0; overflow: visible;">
-        <div style="width:100%; overflow: visible; display:flex; align-items:flex-end; justify-content:center; line-height:0.85;">
+      <!-- 'ty' is vertically centred against cap-height of the rest, making it appear to float/fly from above -->
+      <section class="bg-background border-t border-border relative z-10" style="padding-top: 2.5rem; padding-bottom: 1.5rem; overflow: visible;">
+        <div style="width:100%; overflow: visible; display:flex; align-items:baseline; justify-content:center;">
           <span
             aria-label="Antigravity"
             style="
-              display: block;
               font-family: 'Google Sans Flex', 'Google Sans', 'Product Sans', 'Outfit', sans-serif;
-              font-weight: 700;
+              font-weight: 400;
               font-size: clamp(72px, 21vw, 300px);
               letter-spacing: -0.04em;
               color: #18181b;
               white-space: nowrap;
-              line-height: 0.85;
+              line-height: 1;
               user-select: none;
-              padding: 0;
               overflow: visible;
-              display: block;
-              width: 100%;
-              text-align: center;
+              display: inline;
             "
-          >Antigravity</span>
+          ><span style="vertical-align: baseline;">Antigravi</span><span style="vertical-align: middle; position: relative; letter-spacing: -0.04em;">ty</span></span>
         </div>
       </section>
     </main>
