@@ -103,8 +103,10 @@
     <style>
       html {
         background-color: #000000;
-        overflow-x: hidden;
-        overscroll-behavior: none;
+        /* NOTE: Do NOT set overflow-x:hidden on html — on iOS Safari it transfers
+           scroll handling from the viewport to the html element, breaking touch scroll.
+           Only body should have overflow-x:hidden. */
+        overscroll-behavior-x: none;
       }
       body {
         background-color: #ffffff;
@@ -719,7 +721,7 @@
             style="
               font-family: 'Google Sans Flex', 'Google Sans', 'Product Sans', 'Outfit', sans-serif;
               font-weight: 500;
-              font-size: clamp(72px, 21vw, 300px);
+              font-size: clamp(34px, 14.5vw, 300px);
               letter-spacing: 0.02em;
               color: #18181b;
               white-space: nowrap;
